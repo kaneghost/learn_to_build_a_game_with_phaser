@@ -1,0 +1,2 @@
+# learn_to_build_a_game_with_phaser
+一个教大家用Phaser和PhoneGap来开发iOS和Android手机游戏的教程
