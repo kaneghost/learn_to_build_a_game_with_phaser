@@ -1,7 +1,9 @@
+# 背景和准备工作 #
+
 ## 前言 ##
 一个月前看到[Phaser](http://phaser.io)这个很简洁漂亮的HTML5 Javascript游戏框架后便有了做一个手游玩玩的念头。半个月前也开始陆陆续续的照着[Phaser官网的教程](http://phaser.io/tutorials/making-your-first-phaser-game)学习Phaser。为什么要写这篇博客呢？完全是为了治愈目前的拖延，督促自己完成目标：
 
- 1. 用**Phaser**开发一个手机游戏
+ 1. 用**Phaser**开发一个网页游戏
  2. 用**PhoneGap**把游戏打包成Android APP
  3. Android APP在**豌豆荚**上线
  4. 用**PhoneGap**把游戏打包成iOS APP
@@ -20,19 +22,18 @@
 
 ## 准备工作 ##
 
-APP开发当然用MacBook最好，因为iOS版的游戏APP必须在MacBook电脑上用PhoneGap打包，此外MacBook也可以打包Android APP。如果你没有MacBook也没有关系，准备一台能上网的Windows PC就可以了。用Windows PC我们至少可以做到开发Android APP并上线（目标的第3步）。
+APP开发当然用MacBook最好，因为iOS版的游戏APP必须在苹果电脑上用PhoneGap打包，此外MacBook也可以打包Android APP。如果你没有MacBook也没有关系，准备一台能上网的Windows PC就可以了。用Windows PC我们至少可以做到开发Android APP并上线（目标的第3步）。
 
-**你需要准备:**
+### 你需要准备 ###
 
 - 能上网的Windows PC
 - 在Windows PC上安装[Python 2.7.x for Windows](https://www.python.org/downloads/) （用来做HTTP server）
 
 ## 开始行动 ##
-激动人心的时刻到了，让我们开始着手**目标1**：**用Phaser开发一个手机游戏**。
+激动人心的时刻到了，让我们开始着手**目标1**：**用Phaser开发一个网页游戏**。
 
 ### 游戏的策划 ###
 开发一个游戏，想想还真是不简单。
-
 
 
 
