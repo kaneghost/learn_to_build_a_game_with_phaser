@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="6" tilewidth="84" tileheight="84" nextobjectid="1">
+ <tileset firstgid="1" name="ground_sprites" tilewidth="84" tileheight="84" tilecount="20" columns="4">
+  <image source="ground_sprites.png" width="336" height="420"/>
+  <terraintypes>
+   <terrain name="新地形" tile="-1"/>
+  </terraintypes>
+ </tileset>
+ <layer name="GroundLayer" width="20" height="6">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+17,17,17,17,17,17,17,0,0,17,17,17,17,0,0,17,17,17,17,17,
+13,13,13,13,13,13,13,0,0,13,13,13,13,0,0,13,13,13,13,13
+</data>
+ </layer>
+</map>
