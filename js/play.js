@@ -25,28 +25,34 @@ MyGame.Play.prototype = {
     console.log('game.width ' + this.game.width + " height " + this.game.height);
     console.log('world.width ' + this.world.width + " height " + this.world.height);  
 
-    this.player = this.add.sprite(0,0, 'player');  
-    this.physics.enable(this.player);
-    this.player.body.gravity.y = 500;
-    this.player.body.velocity.x = 100;
+    this.player = this.add.sprite(60, 60, 'player');
+    this.player.anchor.setTo(0.5, 0.5);  
+    this.physics.arcade.enable(this.player);
+    this.player.body.gravity.y = 730;
 
     this.camera.follow(this.player);
 
-    this.input.onDown.add(this.letsJump, this);    
+    //  Here we create our box group
+    this.boxes = this.game.add.group();
+    this.boxes.enableBody = true;
+    this.map.createFromObjects('MyBoxes', 1, 'tiles', 0, true, false, this.boxes);
 
+    this.input.onDown.add(this.letsJump, this);
   },
 
   letsJump: function() {
-    this.player.body.velocity.y = -250;
+    if (this.player.body.blocked.down) {
+      this.player.body.velocity.y = -300;
+    }
   },
   
   update: function() {
      this.physics.arcade.collide(this.player, this.groundLayer);
+     // console.log(this.player.body.blocked.down); 
+    if (this.player.body.blocked.down) { 
+      this.player.body.velocity.x = 170;
+    }
 
-     // Make the sprite jump when the up key is pushed
-    // if(this.cursors.up.isDown) {
-    //   this.player.body.velocity.y = -250;
-    // }
   },
 
   render: function() {

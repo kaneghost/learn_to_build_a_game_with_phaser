@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="22" height="10" tilewidth="64" tileheight="64" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="22" height="10" tilewidth="64" tileheight="64" nextobjectid="11">
  <tileset firstgid="1" name="myspritesheet" tilewidth="64" tileheight="64" tilecount="6" columns="2">
   <image source="spritesheet.png" width="128" height="192"/>
  </tileset>
- <layer name="GroundLayer" width="22" height="10" offsetx="2" offsety="0">
+ <layer name="GroundLayer" width="22" height="10">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -12,9 +12,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,
-0,0,0,1,0,0,0,0,0,0,5,0,0,0,0,0,0,0,1,1,0,0,
-2,2,2,2,2,2,2,6,6,2,2,2,2,2,6,6,6,2,2,2,2,2
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2,2,2,2,2,2,2,0,0,2,2,2,2,2,0,0,0,2,2,2,2,2
 </data>
  </layer>
+ <objectgroup name="MyBoxes">
+  <object id="5" name="box" type="k" gid="1" x="192" y="576" width="64" height="64"/>
+  <object id="10" name="box" type="k" gid="1" x="384" y="576" width="64" height="64"/>
+ </objectgroup>
 </map>
