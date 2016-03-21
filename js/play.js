@@ -12,11 +12,12 @@ MyGame.Play.prototype = {
     this.stage.backgroundColor = '#A6E5F5';
 
     this.map = this.add.tilemap('tilemap');
-    this.map.addTilesetImage('ground_sprites', 'tiles');    
+    this.map.addTilesetImage('myspritesheet', 'tiles');    
+    // this.map.addTilesetImage('background', 'BackgroundLayer');
 
     this.groundLayer = this.map.createLayer('GroundLayer');
-    this.map.setCollisionBetween(1, 20, true, 'GroundLayer');
-    // this.backgroundLayer = this.map.createLayer('BackGroundLayer');
+    this.map.setCollisionBetween(1, 22, true, 'GroundLayer');
+    // this.backgroundLayer = this.map.createLayer('BackgroundLayer');
 
     console.log('game.width ' + this.game.width + " height " + this.game.height);
     console.log('world.width ' + this.world.width + " height " + this.world.height);
@@ -24,24 +25,28 @@ MyGame.Play.prototype = {
     console.log('game.width ' + this.game.width + " height " + this.game.height);
     console.log('world.width ' + this.world.width + " height " + this.world.height);  
 
-    this.player = this.add.sprite(0,100, 'player');  
+    this.player = this.add.sprite(0,0, 'player');  
     this.physics.enable(this.player);
-    this.player.body.gravity.y = 200;
+    this.player.body.gravity.y = 500;
     this.player.body.velocity.x = 100;
 
     this.camera.follow(this.player);
 
-    //Enable cursor keys so we can create some controls
-    this.cursors = this.game.input.keyboard.createCursorKeys();
+    this.input.onDown.add(this.letsJump, this);    
+
+  },
+
+  letsJump: function() {
+    this.player.body.velocity.y = -250;
   },
   
   update: function() {
      this.physics.arcade.collide(this.player, this.groundLayer);
 
-     //Make the sprite jump when the up key is pushed
-    if(this.cursors.up.isDown) {
-      this.player.body.velocity.y = -100;
-    }
+     // Make the sprite jump when the up key is pushed
+    // if(this.cursors.up.isDown) {
+    //   this.player.body.velocity.y = -250;
+    // }
   },
 
   render: function() {
