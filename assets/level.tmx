@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="22" height="10" tilewidth="64" tileheight="64" nextobjectid="11">
- <tileset firstgid="1" name="myspritesheet" tilewidth="64" tileheight="64" tilecount="6" columns="2">
-  <image source="spritesheet.png" width="128" height="192"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="8" tilewidth="70" tileheight="70" nextobjectid="8">
+ <tileset firstgid="1" name="myspritesheet" tilewidth="70" tileheight="70" tilecount="35" columns="5">
+  <image source="spritesheet.png" width="350" height="490"/>
  </tileset>
- <layer name="GroundLayer" width="22" height="10">
+ <tileset firstgid="36" name="enemies" tilewidth="51" tileheight="51" tilecount="1" columns="0">
+  <tile id="0">
+   <image width="51" height="51" source="texture-atlas/blockerMad.png"/>
+  </tile>
+ </tileset>
+ <layer name="BackgroundLayer" width="30" height="8">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-2,2,2,2,2,2,2,0,0,2,2,2,2,2,0,0,0,2,2,2,2,2
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,20,25,0,22,6,22,0,0,0,0,0,0,0,0,0,0,21,0,0,0,0,0,0,0,0,25,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,14,14,14,14,14,14,14,14,0,0,0,0,0,0,14,14,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="MyBoxes">
-  <object id="5" name="box" type="k" gid="1" x="192" y="576" width="64" height="64"/>
-  <object id="10" name="box" type="k" gid="1" x="384" y="576" width="64" height="64"/>
+ <layer name="GroundLayer" width="30" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+24,24,24,24,24,24,24,24,33,8,8,8,8,8,8,34,24,24,24,24,24,24,8,8,24,24,24,24,24,24,
+35,35,35,35,35,35,35,35,0,0,0,0,0,0,0,0,35,35,35,35,35,35,0,0,35,35,35,35,35,35
+</data>
+ </layer>
+ <objectgroup name="ObjectLayer">
+  <object id="5" name="blockerMad" gid="36" x="630" y="420" width="51" height="51"/>
+  <object id="6" name="blockerMad" gid="36" x="892.5" y="420" width="51" height="51"/>
+  <object id="7" name="blockerMad" gid="36" x="892.5" y="367.5" width="51" height="51"/>
  </objectgroup>
 </map>
