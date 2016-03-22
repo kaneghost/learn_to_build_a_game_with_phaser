@@ -1,7 +1,7 @@
 var MyGame = MyGame || {};
 
-var targetWidth = 960; // 3:2
-var targetHeight = 640;
+var targetWidth = 840;//960; // 3:2
+var targetHeight = 560;//640;
 
 var newWidth = (window.innerWidth/window.innerHeight) * targetHeight;
 var newHeight = targetHeight;

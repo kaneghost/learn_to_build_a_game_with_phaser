@@ -11,13 +11,13 @@ MyGame.Play.prototype = {
 
     this.stage.backgroundColor = '#A6E5F5';
 
-    this.map = this.add.tilemap('tilemap');
+    this.map = this.add.tilemap('tilemap');    
     this.map.addTilesetImage('myspritesheet', 'tiles');    
     // this.map.addTilesetImage('background', 'BackgroundLayer');
 
     this.groundLayer = this.map.createLayer('GroundLayer');
-    this.map.setCollisionBetween(1, 22, true, 'GroundLayer');
-    // this.backgroundLayer = this.map.createLayer('BackgroundLayer');
+    this.map.setCollisionBetween(1, 35, true, 'GroundLayer');
+    this.backgroundLayer = this.map.createLayer('BackgroundLayer');
 
     console.log('game.width ' + this.game.width + " height " + this.game.height);
     console.log('world.width ' + this.world.width + " height " + this.world.height);
@@ -32,10 +32,11 @@ MyGame.Play.prototype = {
 
     this.camera.follow(this.player);
 
-    //  Here we create our box group
-    this.boxes = this.game.add.group();
-    this.boxes.enableBody = true;
-    this.map.createFromObjects('MyBoxes', 1, 'tiles', 0, true, false, this.boxes);
+    //  Here we create our enemies, put them in a group
+    // this.enemyGroup = this.game.add.group();
+    // this.enemyGroup.enableBody = true;
+    // this.map.createFromObjects('ObjectLayer', 'box', 'box', 0, true, false, this.enemyGroup);
+    // this.map.createFromObjects('ObjectLayer', 'water', 'water', 0, true, false, this.enemyGroup);    
 
     this.input.onDown.add(this.letsJump, this);
   },
@@ -47,16 +48,16 @@ MyGame.Play.prototype = {
   },
   
   update: function() {
-     this.physics.arcade.collide(this.player, this.groundLayer);
-     // console.log(this.player.body.blocked.down); 
+    this.physics.arcade.collide(this.player, this.groundLayer);
+    // this.physics.arcade.overlap(this.player, this.enemyGroup, this.playerHit, null, this);
+     
     if (this.player.body.blocked.down) { 
       this.player.body.velocity.x = 170;
     }
 
   },
 
-  render: function() {
-      // game.debug.body(this.player);
-      // game.debug.bodyInfo(this.player, 32, 320);
-  }  
+  playerHit: function(player, hit) {
+    console.log('I hit: ' + hit.name);
+  },
 };
