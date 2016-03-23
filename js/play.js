@@ -21,10 +21,9 @@ MyGame.Play.prototype = {
     this.groundLayer.resizeWorld(); 
 
     // create the player
-    this.player = this.add.sprite(60, 60, 'texture-atlas', 'alienBlue_stand');
+    this.player = this.add.sprite(60, 60, 'texture-atlas', 'alienBlue_walk2');
     this.player.anchor.setTo(0.5, 0.5);
-    this.player.animations.add('walking', Phaser.Animation.generateFrameNames('alienBlue_walk', 1, 2), 5, true);
-    this.player.animations.add('jumping', ['alienBlue_jump'], 1, false);    
+    this.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 5, true);
 
     this.physics.arcade.enable(this.player);
     this.player.body.gravity.y = 700;
@@ -44,43 +43,50 @@ MyGame.Play.prototype = {
     this.endPoint.callAll('animations.add', 'animations', 'fluttering', ['flagRed', 'flagRed2'], 5, true);
     this.endPoint.callAll('animations.play', 'animations', 'fluttering');
     
-    // user tap mobile screen
-    this.input.onDown.add(this.letsJump, this);
+    this.level = 1;
+    
+    // user tap mobile screen to make player jump
+    this.input.onDown.add(this.playerJump, this);
   },
 
-  letsJump: function() {
+  playerJump: function() {
     if (this.player.body.blocked.down) {
+      this.player.animations.stop();
+      this.player.frameName = 'alienBlue_walk2';
       this.player.body.velocity.y = -480;
-      this.player.animations.play('jumping');
     }
   },
 
   playerHit: function(player, hit) {
     console.log('I hit: ' + hit.name);
-    this.letsRunAgain();
+    this.letPlayerRunAgain();
   },
 
-  letsRunAgain: function() {
+  letPlayerRunAgain: function() {
+    this.player.animations.stop();
     this.player.x = 60;
     this.player.y = 60;
     this.player.body.velocity.x = 0;
-    this.player.body.velocity.y = 0;
+
     this.player.body.blocked.down = false;    
   }, 
 
-  runCompleted: function() {
+  playFinishedOneLevel: function() {
     console.log('you Win!');
   },
   
   update: function() {
     this.physics.arcade.collide(this.player, this.groundLayer);
     this.physics.arcade.overlap(this.player, this.enemyGroup, this.playerHit, null, this);
-    this.physics.arcade.overlap(this.player, this.endPoint, this.runCompleted, null, this);
+    this.physics.arcade.overlap(this.player, this.endPoint, this.playFinishedOneLevel, null, this);
      
     if (this.player.body.blocked.down) { 
-      this.player.body.velocity.x = 170;
+      this.player.body.velocity.x = 180;
       this.player.animations.play('walking');
     }
+  },
 
+  render: function() {
+    // this.game.debug.spriteInfo(this.player, 32, 32);
   }
 };
