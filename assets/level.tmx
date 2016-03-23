@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="8" tilewidth="70" tileheight="70" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="8" tilewidth="70" tileheight="70" nextobjectid="22">
  <tileset firstgid="1" name="myspritesheet" tilewidth="70" tileheight="70" tilecount="35" columns="5">
   <image source="spritesheet.png" width="350" height="490"/>
  </tileset>
- <tileset firstgid="36" name="enemies" tilewidth="51" tileheight="51" tilecount="1" columns="0">
+ <tileset firstgid="36" name="enemies" tilewidth="70" tileheight="70" tilecount="2" columns="0">
   <tile id="0">
    <image width="51" height="51" source="texture-atlas/blockerMad.png"/>
+  </tile>
+  <tile id="2">
+   <image width="70" height="70" source="texture-atlas/flagYellow.png"/>
   </tile>
  </tileset>
  <layer name="BackgroundLayer" width="30" height="8">
@@ -15,7 +18,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,20,25,0,22,6,22,0,0,0,0,0,0,0,0,0,0,21,0,0,0,0,0,0,0,0,25,0,0,0,
+0,20,25,0,22,6,0,0,0,0,0,0,0,0,0,0,0,21,0,0,0,0,0,0,0,0,25,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,14,14,14,14,14,14,14,14,0,0,0,0,0,0,14,14,0,0,0,0,0,0
 </data>
@@ -34,7 +37,10 @@
  </layer>
  <objectgroup name="ObjectLayer">
   <object id="5" name="blockerMad" gid="36" x="630" y="420" width="51" height="51"/>
-  <object id="6" name="blockerMad" gid="36" x="892.5" y="420" width="51" height="51"/>
-  <object id="7" name="blockerMad" gid="36" x="892.5" y="367.5" width="51" height="51"/>
+  <object id="6" name="blockerMad" gid="36" x="980.5" y="420" width="51" height="51"/>
+  <object id="7" name="blockerMad" gid="36" x="980.5" y="367.5" width="51" height="51"/>
+  <object id="15" name="blockerMad" gid="36" x="1560" y="420" width="51" height="51"/>
+  <object id="16" name="blockerMad" gid="36" x="1611" y="420" width="51" height="51"/>
+  <object id="20" name="flag" gid="38" x="1960" y="420" width="70" height="70"/>
  </objectgroup>
 </map>
