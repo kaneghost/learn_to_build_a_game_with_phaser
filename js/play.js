@@ -26,7 +26,7 @@ MyGame.Play.prototype = {
     this.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 5, true);
 
     this.physics.arcade.enable(this.player);
-    this.player.body.gravity.y = 700;
+    this.player.body.gravity.y = 1000;
 
     this.camera.follow(this.player);
 
@@ -43,6 +43,13 @@ MyGame.Play.prototype = {
     this.endPoint.callAll('animations.add', 'animations', 'fluttering', ['flagRed', 'flagRed2'], 5, true);
     this.endPoint.callAll('animations.play', 'animations', 'fluttering');
     
+    this.startTime = new Date();
+    this.totalTime = 120;
+    this.timeElapsed = 0;
+    this.createTimer();
+    this.gameTimer = this.time.events.loop(100, this.updateTimer());
+    
+    //
     this.level = 1;
     
     // user tap mobile screen to make player jump
@@ -53,12 +60,12 @@ MyGame.Play.prototype = {
     if (this.player.body.blocked.down) {
       this.player.animations.stop();
       this.player.frameName = 'alienBlue_walk2';
-      this.player.body.velocity.y = -480;
+      this.player.body.velocity.y = -550;
     }
   },
 
-  playerHit: function(player, hit) {
-    console.log('I hit: ' + hit.name);
+  playerHit: function(player, enemy) {
+    console.log('I hit: ' + enemy.name);
     this.letPlayerRunAgain();
   },
 
@@ -74,14 +81,46 @@ MyGame.Play.prototype = {
   playFinishedOneLevel: function() {
     console.log('you Win!');
   },
+
+  createTimer: function(){ 
+    this.timeLabel = this.add.text(Math.round(this.game.width/2), 20, "00:00", {font: "50px Arial", fill: "#fff", align: "center"}); 
+    this.timeLabel.fixedToCamera = true; 
+  },
   
+  updateTimer: function() {
+   
+      var me = this;
+   
+      var currentTime = new Date();
+      var timeDifference = me.startTime.getTime() - currentTime.getTime();
+   
+      //Time elapsed in seconds
+      me.timeElapsed = Math.abs(timeDifference / 1000);
+   
+      //Time remaining in seconds
+      var timeRemaining = me.totalTime - me.timeElapsed; 
+   
+      //Convert seconds into minutes and seconds
+      var minutes = Math.floor(timeRemaining / 60);
+      var seconds = Math.floor(timeRemaining) - (60 * minutes);
+   
+      //Display minutes, add a 0 to the start if less than 10
+      var result = (minutes < 10) ? "0" + minutes : minutes; 
+   
+      //Display seconds, add a 0 to the start if less than 10
+      result += (seconds < 10) ? ":0" + seconds : ":" + seconds; 
+   
+      me.timeLabel.text = result;
+   
+  },
+
   update: function() {
     this.physics.arcade.collide(this.player, this.groundLayer);
     this.physics.arcade.overlap(this.player, this.enemyGroup, this.playerHit, null, this);
     this.physics.arcade.overlap(this.player, this.endPoint, this.playFinishedOneLevel, null, this);
      
     if (this.player.body.blocked.down) { 
-      this.player.body.velocity.x = 180;
+      this.player.body.velocity.x = 250;
       this.player.animations.play('walking');
     }
   },
