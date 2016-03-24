@@ -43,29 +43,23 @@ MyGame.Play.prototype = {
     this.endPoint.callAll('animations.add', 'animations', 'fluttering', ['flagRed', 'flagRed2'], 5, true);
     this.endPoint.callAll('animations.play', 'animations', 'fluttering');
     
-    this.startTime = new Date();
-    this.totalTime = 120;
-    this.timeElapsed = 0;
     this.createTimer();
-    this.gameTimer = this.time.events.loop(100, this.updateTimer());
-    
-    //
-    this.level = 1;
     
     // user tap mobile screen to make player jump
     this.input.onDown.add(this.playerJump, this);
+    // this.input.onTap.add(this.playerJump, this);
   },
 
-  playerJump: function() {
+  playerJump: function(point, isDoubleTap) {
     if (this.player.body.blocked.down) {
-      this.player.animations.stop();
-      this.player.frameName = 'alienBlue_walk2';
-      this.player.body.velocity.y = -550;
+        this.player.animations.stop();
+        this.player.frameName = 'alienBlue_walk2';
+        this.player.body.velocity.y = -550;
     }
   },
 
   playerHit: function(player, enemy) {
-    console.log('I hit: ' + enemy.name);
+    console.log('I hit: ' + enemy.name);    
     this.letPlayerRunAgain();
   },
 
@@ -75,27 +69,46 @@ MyGame.Play.prototype = {
     this.player.y = 60;
     this.player.body.velocity.x = 0;
 
-    this.player.body.blocked.down = false;    
+    this.player.body.blocked.down = false;  
+
+    this.restartTimer();  
   }, 
 
-  playFinishedOneLevel: function() {
+  playFinishedRunning: function() {
     console.log('you Win!');
+    this.stopTimer();
+  },
+
+  stopTimer: function() {
+    this.time.events.removeAll();
+  },
+
+  restartTimer: function() {
+    this.time.events.removeAll();
+
+    this.startTime = new Date();    
+    this.timeElapsed = 0;
+
+    this.time.events.loop(200, this.updateTimer, this);
   },
 
   createTimer: function(){ 
-    this.timeLabel = this.add.text(Math.round(this.game.width/2), 20, "00:00", {font: "50px Arial", fill: "#fff", align: "center"}); 
+    this.totalTime = 20;
+
+    this.startTime = new Date();    
+    this.timeElapsed = 0;
+
+    this.timeLabel = this.add.text(Math.round(this.game.width/2), 50, "00:00", {font: "60px Arial", fill: "#fff", align: "center"}); 
+    this.timeLabel.anchor.set(0.5);
     this.timeLabel.fixedToCamera = true; 
+
+    this.time.events.loop(200, this.updateTimer, this);
   },
   
   updateTimer: function() {
-   
       var me = this;
    
-      var currentTime = new Date();
-      var timeDifference = me.startTime.getTime() - currentTime.getTime();
-   
-      //Time elapsed in seconds
-      me.timeElapsed = Math.abs(timeDifference / 1000);
+      me.timeElapsed = Math.abs((me.startTime.getTime() - new Date().getTime()) / 1000);
    
       //Time remaining in seconds
       var timeRemaining = me.totalTime - me.timeElapsed; 
@@ -110,14 +123,13 @@ MyGame.Play.prototype = {
       //Display seconds, add a 0 to the start if less than 10
       result += (seconds < 10) ? ":0" + seconds : ":" + seconds; 
    
-      me.timeLabel.text = result;
-   
+      me.timeLabel.text = result;   
   },
 
   update: function() {
     this.physics.arcade.collide(this.player, this.groundLayer);
     this.physics.arcade.overlap(this.player, this.enemyGroup, this.playerHit, null, this);
-    this.physics.arcade.overlap(this.player, this.endPoint, this.playFinishedOneLevel, null, this);
+    this.physics.arcade.overlap(this.player, this.endPoint, this.playFinishedRunning, null, this);
      
     if (this.player.body.blocked.down) { 
       this.player.body.velocity.x = 250;
