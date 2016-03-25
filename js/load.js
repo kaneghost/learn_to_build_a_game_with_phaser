@@ -9,7 +9,7 @@ MyGame.Load.prototype = {
     this.scale.pageAlignVertically = true;
 
     this.load.tilemap('tilemap', 'assets/level.json', null, Phaser.Tilemap.TILED_JSON);
-    this.load.image('tiles', 'assets/spritesheet.png');
+    this.load.image('tiles', 'assets/tiles.png');
     this.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
   },
 
