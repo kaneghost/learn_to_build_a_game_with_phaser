@@ -11,5 +11,6 @@
 下面的教程将一步一步的教你如何设计、开发和发布用Phaser开发的游戏。（教程在不断更新中）
 
 - [用Phaser和PhoneGap来开发iOS和Android游戏 - 1. 为什么写这篇博客](http://zhongzhu.github.io/2016/03/11/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%99%E8%BF%99%E7%AF%87%E5%8D%9A%E5%AE%A2/)
-- [用Phaser和PhoneGap来开发iOS和Android游戏-2-游戏策划](http://zhongzhu.github.io/2016/03/15/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-2-%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92/)
-- todo
+- [用Phaser和PhoneGap来开发iOS和Android游戏 - 2. 游戏策划](http://zhongzhu.github.io/2016/03/15/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-2-%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92/)
+- [用Phaser和PhoneGap来开发iOS和Android游戏 - 3. 用Tiled-Map-Editor来生成游戏场景](http://zhongzhu.github.io/2016/03/25/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-3-%E7%94%A8Tiled-Map-Editor%E6%9D%A5%E7%94%9F%E6%88%90%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/)
+- ToDo
