@@ -1,8 +1,8 @@
 var MyGame = MyGame || {};
 
-MyGame.Load = function () {};
+MyGame.Preload = function () {};
 
-MyGame.Load.prototype = {    
+MyGame.Preload.prototype = {    
   preload: function () {
     this.load.tilemap('tilemap', 'assets/level.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('tiles', 'assets/tiles.png');

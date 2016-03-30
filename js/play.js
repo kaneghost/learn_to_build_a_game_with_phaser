@@ -49,9 +49,9 @@ MyGame.Play.prototype = {
 
   playerJump: function(point, isDoubleTap) {
     if (this.player.body.blocked.down) {
-        this.player.animations.stop();
-        this.player.frameName = 'alienBlue_walk2';
-        this.player.body.velocity.y = -550;
+      this.player.animations.stop();
+      this.player.frameName = 'alienBlue_walk2';
+      this.player.body.velocity.y = -550;
     }
   },
 
@@ -68,12 +68,18 @@ MyGame.Play.prototype = {
 
     this.player.body.blocked.down = false;  
 
-    this.restartTimer();  
+    // this.restartTimer();  
   }, 
 
-  playFinishedRunning: function() {
-    console.log('you Win!');
+  gameOver: function() {    
     this.stopTimer();
+
+    if (this.timeElapsed > this.totalTime) {
+      console.log('You Lose!');
+      this.state.start('GameOver');
+    } else {
+      console.log('you Win!');
+    }    
   },
 
   stopTimer: function() {
@@ -90,7 +96,7 @@ MyGame.Play.prototype = {
   },
 
   createTimer: function(){ 
-    this.totalTime = 20;
+    this.totalTime = 10;
 
     this.startTime = new Date();    
     this.timeElapsed = 0;
@@ -103,31 +109,32 @@ MyGame.Play.prototype = {
   },
   
   updateTimer: function() {
-      var me = this;
-   
-      me.timeElapsed = Math.abs((me.startTime.getTime() - new Date().getTime()) / 1000);
-   
+    var me = this;
+
+    me.timeElapsed = Math.abs((me.startTime.getTime() - new Date().getTime()) / 1000);
+
+    if (me.timeElapsed > me.totalTime) {
+      me.gameOver();
+    } else {     
       //Time remaining in seconds
       var timeRemaining = me.totalTime - me.timeElapsed; 
-   
+
       //Convert seconds into minutes and seconds
       var minutes = Math.floor(timeRemaining / 60);
       var seconds = Math.floor(timeRemaining) - (60 * minutes);
-   
-      //Display minutes, add a 0 to the start if less than 10
+      
       var result = (minutes < 10) ? "0" + minutes : minutes; 
-   
-      //Display seconds, add a 0 to the start if less than 10
       result += (seconds < 10) ? ":0" + seconds : ":" + seconds; 
-   
+
       me.timeLabel.text = result;   
+    }
   },
 
   update: function() {
     this.physics.arcade.collide(this.player, this.groundLayer);
     this.physics.arcade.overlap(this.player, this.enemyGroup, this.playerHit, null, this);
-    this.physics.arcade.overlap(this.player, this.endPoint, this.playFinishedRunning, null, this);
-     
+    this.physics.arcade.overlap(this.player, this.endPoint, this.gameOver, null, this);
+
     if (this.player.body.blocked.down) { 
       this.player.body.velocity.x = 250;
       this.player.animations.play('walking');
