@@ -7,13 +7,9 @@ MyGame.Play.prototype = {
   },
 
   create: function () {
-    this.physics.startSystem(Phaser.Physics.ARCADE);
-
-    this.stage.backgroundColor = '#A6E5F5';
-
     // create game map
     this.map = this.add.tilemap('tilemap');    
-    this.map.addTilesetImage('myspritesheet', 'tiles');
+    this.map.addTilesetImage('mytileset', 'tiles');
 
     this.groundLayer = this.map.createLayer('GroundLayer');
     this.map.setCollisionBetween(1, 35, true, 'GroundLayer');
@@ -33,14 +29,15 @@ MyGame.Play.prototype = {
     // create our enemies, put them in a group
     this.enemyGroup = this.game.add.group();
     this.enemyGroup.enableBody = true;
-    this.map.createFromObjects('ObjectLayer', 'blockerMad', 'texture-atlas', 'blockerMad', true, false, this.enemyGroup);
+    this.map.createFromObjects('ObjectLayer', 'box', 'texture-atlas', 'blockerMad', true, false, this.enemyGroup);
+    this.map.createFromObjects('ObjectLayer', 'water', 'texture-atlas', 'liquidWaterTop_mid', true, false, this.enemyGroup);
 
     // make the yellow flag as our end point
     this.endPoint = this.game.add.group();
     this.endPoint.enableBody = true;
     this.map.createFromObjects('ObjectLayer', 'flag', 'texture-atlas', 'flagYellow', true, false, this.endPoint);
     
-    this.endPoint.callAll('animations.add', 'animations', 'fluttering', ['flagRed', 'flagRed2'], 5, true);
+    this.endPoint.callAll('animations.add', 'animations', 'fluttering', ['flagYellow', 'flagYellow2'], 5, true);
     this.endPoint.callAll('animations.play', 'animations', 'fluttering');
     
     this.createTimer();
