@@ -37,7 +37,7 @@ MyGame.Play.prototype = {
     this.endPoint.enableBody = true;
     this.map.createFromObjects('ObjectLayer', 'flag', 'texture-atlas', 'flagYellow', true, false, this.endPoint);
     
-    this.endPoint.callAll('animations.add', 'animations', 'fluttering', ['flagYellow', 'flagYellow2'], 5, true);
+    this.endPoint.callAll('animations.add', 'animations', 'fluttering', ['flagYellow', 'flagYellow2'], 3, true);
     this.endPoint.callAll('animations.play', 'animations', 'fluttering');
     
     this.createTimer();
@@ -66,9 +66,7 @@ MyGame.Play.prototype = {
     this.player.y = 60;
     this.player.body.velocity.x = 0;
 
-    this.player.body.blocked.down = false;  
-
-    // this.restartTimer();  
+    this.player.body.blocked.down = false;
   }, 
 
   gameOver: function() {    
@@ -89,44 +87,36 @@ MyGame.Play.prototype = {
   restartTimer: function() {
     this.time.events.removeAll();
 
-    this.startTime = new Date();    
+    // this.startTime = new Date();    
     this.timeElapsed = 0;
 
-    this.time.events.loop(200, this.updateTimer, this);
+    this.time.events.loop(Phaser.Timer.SECOND, this.updateTimer, this);
   },
 
   createTimer: function(){ 
     this.totalTime = 10;
 
-    this.startTime = new Date();    
+    // this.startTime = new Date();    
     this.timeElapsed = 0;
 
     this.timeLabel = this.add.text(Math.round(this.game.width/2), 50, "00:00", {font: "60px Arial", fill: "#fff", align: "center"}); 
     this.timeLabel.anchor.set(0.5);
     this.timeLabel.fixedToCamera = true; 
 
-    this.time.events.loop(200, this.updateTimer, this);
+    this.time.events.loop(Phaser.Timer.SECOND, this.updateTimer, this);
   },
   
   updateTimer: function() {
     var me = this;
 
-    me.timeElapsed = Math.abs((me.startTime.getTime() - new Date().getTime()) / 1000);
-
+    me.timeElapsed++;
     if (me.timeElapsed > me.totalTime) {
       me.gameOver();
     } else {     
-      //Time remaining in seconds
-      var timeRemaining = me.totalTime - me.timeElapsed; 
+      var timeRemaining = me.totalTime - me.timeElapsed;
+      var minutes = (timeRemaining < 10) ? "0" + timeRemaining : timeRemaining;
 
-      //Convert seconds into minutes and seconds
-      var minutes = Math.floor(timeRemaining / 60);
-      var seconds = Math.floor(timeRemaining) - (60 * minutes);
-      
-      var result = (minutes < 10) ? "0" + minutes : minutes; 
-      result += (seconds < 10) ? ":0" + seconds : ":" + seconds; 
-
-      me.timeLabel.text = result;   
+      me.timeLabel.text = '00:' + minutes;
     }
   },
 
@@ -139,9 +129,5 @@ MyGame.Play.prototype = {
       this.player.body.velocity.x = 250;
       this.player.animations.play('walking');
     }
-  },
-
-  render: function() {
-    // this.game.debug.spriteInfo(this.player, 32, 32);
   }
 };
