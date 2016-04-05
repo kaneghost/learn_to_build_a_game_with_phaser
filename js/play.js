@@ -1,82 +1,130 @@
 var MyGame = MyGame || {};
 
+MyGame.TIME_LIMIT = 20;
+MyGame.LEVEL_COUNT = 2;
+
 MyGame.Play = function () {}; 
 
-MyGame.Play.prototype = {    
+MyGame.Play.prototype = {
   preload: function () {
   },
 
   create: function () {
-    // create game map
-    this.map = this.add.tilemap('tilemap');    
-    this.map.addTilesetImage('mytileset', 'tiles');
+    var me = this;
 
-    this.groundLayer = this.map.createLayer('GroundLayer');
-    this.map.setCollisionBetween(1, 35, true, 'GroundLayer');
-    this.backgroundLayer = this.map.createLayer('BackgroundLayer');
-    this.groundLayer.resizeWorld(); 
+    me.level = 0;    
+    me.loadLevel();
 
-    // create the player
-    this.player = this.add.sprite(60, 60, 'texture-atlas', 'alienBlue_walk2');
-    this.player.anchor.setTo(0.5, 0.5);
-    this.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 5, true);
+    me.input.onDown.add(me.playerJump, me);
+  },
 
-    this.physics.arcade.enable(this.player);
-    this.player.body.gravity.y = 1000;
+  loadLevel: function() {
+    var me = this;
 
-    this.camera.follow(this.player);
+    me.level++;
+    if (me.level > MyGame.LEVEL_COUNT) {
+      console.log("You've finished all levels!");
+      me.state.start('GameOver');
+    } else {
+      me.createGameMap();
+      me.createEnemies();
+      me.createCheckPoint();
+      me.createPlayer();
+      me.createTimer(); 
+    }
+  },
+
+  createPlayer: function() {
+    var me = this;
+
+    if (me.player) me.player.destroy();
+
+    me.player = me.add.sprite(60, 60, 'texture-atlas', 'alienBlue_walk2');
+    me.player.anchor.setTo(0.5, 0.5);
+    me.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 5, true);
+
+    me.physics.arcade.enable(me.player);
+    me.player.body.gravity.y = 1000;
+    me.camera.follow(me.player);
+  },
+
+  createCheckPoint: function() {
+    var me = this;
+
+    if (me.checkPoint) me.checkPoint.destroy();
+
+    // make the yellow flag as our check point
+    me.checkPoint = me.game.add.group();
+    me.checkPoint.enableBody = true;
+    me.map.createFromObjects('ObjectLayer', 'flag', 'texture-atlas', 'flagYellow', true, false, me.checkPoint);
+    
+    me.checkPoint.callAll('animations.add', 'animations', 'fluttering', ['flagYellow', 'flagYellow2'], 3, true);
+    me.checkPoint.callAll('animations.play', 'animations', 'fluttering');    
+  },
+
+  createEnemies: function() {
+    var me = this;
+
+    if (me.enemyGruop) me.enemyGruop.destroy();
 
     // create our enemies, put them in a group
-    this.enemyGroup = this.game.add.group();
-    this.enemyGroup.enableBody = true;
-    this.map.createFromObjects('ObjectLayer', 'box', 'texture-atlas', 'blockerMad', true, false, this.enemyGroup);
-    this.map.createFromObjects('ObjectLayer', 'water', 'texture-atlas', 'liquidWaterTop_mid', true, false, this.enemyGroup);
+    me.enemyGroup = me.game.add.group();
+    me.enemyGroup.enableBody = true;
+    me.map.createFromObjects('ObjectLayer', 'box', 'texture-atlas', 'blockerMad', true, false, me.enemyGroup);
+    me.map.createFromObjects('ObjectLayer', 'water', 'texture-atlas', 'liquidWaterTop_mid', true, false, me.enemyGroup);    
+  },
 
-    // make the yellow flag as our end point
-    this.endPoint = this.game.add.group();
-    this.endPoint.enableBody = true;
-    this.map.createFromObjects('ObjectLayer', 'flag', 'texture-atlas', 'flagYellow', true, false, this.endPoint);
-    
-    this.endPoint.callAll('animations.add', 'animations', 'fluttering', ['flagYellow', 'flagYellow2'], 3, true);
-    this.endPoint.callAll('animations.play', 'animations', 'fluttering');
-    
-    this.createTimer();
-    
-    // user tap mobile screen to make player jump
-    this.input.onDown.add(this.playerJump, this);
-    // this.input.onTap.add(this.playerJump, this);
+  createGameMap: function() {
+    var me = this;
+
+    if (me.groundLayer) me.groundLayer.destroy();
+    if (me.backgroundLayer) me.backgroundLayer.destroy();
+    if (me.map) me.map.destroy();
+
+    me.map = me.add.tilemap('level' + me.level);    
+    me.map.addTilesetImage('mytileset', 'tiles');
+
+    me.groundLayer = me.map.createLayer('GroundLayer');
+    me.map.setCollisionBetween(1, 35, true, 'GroundLayer');
+    me.backgroundLayer = me.map.createLayer('BackgroundLayer');
+    me.groundLayer.resizeWorld();     
   },
 
   playerJump: function(point, isDoubleTap) {
-    if (this.player.body.blocked.down) {
-      this.player.animations.stop();
-      this.player.frameName = 'alienBlue_walk2';
-      this.player.body.velocity.y = -550;
+    var me = this;
+    if (me.player.body.blocked.down) {
+      me.player.animations.stop();
+      me.player.frameName = 'alienBlue_walk2';
+      me.player.body.velocity.y = -550;
     }
   },
 
   playerHit: function(player, enemy) {
     console.log('I hit: ' + enemy.name);    
-    this.letPlayerRunAgain();
+    this.initPlayer();
   },
 
-  letPlayerRunAgain: function() {
-    this.player.animations.stop();
-    this.player.x = 60;
-    this.player.y = 60;
-    this.player.body.velocity.x = 0;
+  initPlayer: function() {
+    var me = this;
 
-    this.player.body.blocked.down = false;
-  }, 
+    me.player.animations.stop();
+    me.player.x = 60;
+    me.player.y = 60;
+    me.player.body.velocity.x = 0;
+    me.player.body.velocity.y = 0;
+
+    me.player.body.blocked.down = false;
+  },
 
   gameOver: function() {    
     this.stopTimer();
 
-    if (this.timeElapsed > this.totalTime) {
+    if (this.timeElapsed > MyGame.TIME_LIMIT) {
       console.log('You Lose!');
       this.state.start('GameOver');
     } else {
       console.log('you Win!');
+      this.loadLevel();
     }    
   },
 
@@ -84,36 +132,32 @@ MyGame.Play.prototype = {
     this.time.events.removeAll();
   },
 
-  restartTimer: function() {
-    this.time.events.removeAll();
+  createTimer: function(){
+    var me = this;
+    me.timeElapsed = 0;
 
-    // this.startTime = new Date();    
-    this.timeElapsed = 0;
+    if (me.timeLabel) {
+      console.log('1');
+      me.timeLabel.text = "00:" + MyGame.TIME_LIMIT;
+    } else {
+      console.log('2');
+      me.timeLabel = me.add.text(Math.round(me.game.width/2), 50, 
+        "00:" + MyGame.TIME_LIMIT, {font: "60px Arial", fill: "#fff", align: "center"}); 
+      me.timeLabel.anchor.set(0.5);
+      me.timeLabel.fixedToCamera = true;       
+    }
 
-    this.time.events.loop(Phaser.Timer.SECOND, this.updateTimer, this);
-  },
-
-  createTimer: function(){ 
-    this.totalTime = 10;
-
-    // this.startTime = new Date();    
-    this.timeElapsed = 0;
-
-    this.timeLabel = this.add.text(Math.round(this.game.width/2), 50, "00:00", {font: "60px Arial", fill: "#fff", align: "center"}); 
-    this.timeLabel.anchor.set(0.5);
-    this.timeLabel.fixedToCamera = true; 
-
-    this.time.events.loop(Phaser.Timer.SECOND, this.updateTimer, this);
+    me.time.events.loop(Phaser.Timer.SECOND, me.updateTimer, me);
   },
   
   updateTimer: function() {
     var me = this;
 
     me.timeElapsed++;
-    if (me.timeElapsed > me.totalTime) {
+    if (me.timeElapsed > MyGame.TIME_LIMIT) {
       me.gameOver();
     } else {     
-      var timeRemaining = me.totalTime - me.timeElapsed;
+      var timeRemaining = MyGame.TIME_LIMIT - me.timeElapsed;
       var minutes = (timeRemaining < 10) ? "0" + timeRemaining : timeRemaining;
 
       me.timeLabel.text = '00:' + minutes;
@@ -121,13 +165,14 @@ MyGame.Play.prototype = {
   },
 
   update: function() {
-    this.physics.arcade.collide(this.player, this.groundLayer);
-    this.physics.arcade.overlap(this.player, this.enemyGroup, this.playerHit, null, this);
-    this.physics.arcade.overlap(this.player, this.endPoint, this.gameOver, null, this);
+    var me = this;
+    me.physics.arcade.collide(me.player, me.groundLayer);
+    me.physics.arcade.overlap(me.player, me.enemyGroup, me.playerHit, null, me);
+    me.physics.arcade.overlap(me.player, me.checkPoint, me.gameOver, null, me);
 
-    if (this.player.body.blocked.down) { 
-      this.player.body.velocity.x = 250;
-      this.player.animations.play('walking');
+    if (me.player.body.blocked.down) { 
+      me.player.body.velocity.x = 250;
+      me.player.animations.play('walking');
     }
   }
 };
