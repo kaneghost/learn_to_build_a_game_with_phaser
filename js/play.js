@@ -1,7 +1,7 @@
 var MyGame = MyGame || {};
 
 MyGame.TIME_LIMIT = 20;
-MyGame.LEVEL_COUNT = 2;
+MyGame.LEVEL_COUNT = 1;
 
 MyGame.Play = function () {}; 
 
@@ -13,6 +13,7 @@ MyGame.Play.prototype = {
     var me = this;
 
     me.level = 0;    
+    console.log('level: ' + me.level);
     me.loadLevel();
 
     me.input.onDown.add(me.playerJump, me);
@@ -23,17 +24,22 @@ MyGame.Play.prototype = {
 
     me.level++;
     if (me.level > MyGame.LEVEL_COUNT) {
-      console.log("You've finished all levels!");
       me.state.start('YouWin');
     } else {
-      if (!me.bg) me.bg = me.add.image(0, 0, 'background');
-
+      me.createBackground();
       me.createGameMap();
       me.createEnemies();
       me.createCheckPoint();
       me.createPlayer();
       me.createTimer(); 
     }
+  },
+
+  createBackground: function() {
+    var me = this;
+    console.log(me.bg);
+    if (me.bg) me.bg.destroy();
+    me.bg = me.add.image(0, 0, 'background');
   },
 
   createPlayer: function() {
@@ -85,7 +91,6 @@ MyGame.Play.prototype = {
 
     me.map = me.add.tilemap('level' + me.level);    
     me.map.addTilesetImage('mytileset', 'tiles');
-    // me.map.addTilesetImage('mybackgroundImage', 'background');
 
     me.backgroundLayer = me.map.createLayer('BackgroundLayer');
     me.groundLayer = me.map.createLayer('GroundLayer');
@@ -120,16 +125,10 @@ MyGame.Play.prototype = {
     me.player.body.blocked.down = false;
   },
 
-  gameOver: function() {    
+  levelCompleted: function() {    
     this.stopTimer();
 
-    if (this.timeElapsed > MyGame.TIME_LIMIT) {
-      console.log('You Lose!');
-      this.state.start('GameOver');
-    } else {
-      console.log('you Win!');
-      this.loadLevel();
-    }    
+    this.loadLevel();
   },
 
   stopTimer: function() {
@@ -140,16 +139,12 @@ MyGame.Play.prototype = {
     var me = this;
     me.timeElapsed = 0;
 
-    if (me.timeLabel) {
-      console.log('1');
-      me.timeLabel.text = "00:" + MyGame.TIME_LIMIT;
-    } else {
-      console.log('2');
-      me.timeLabel = me.add.text(Math.round(me.game.width/2), 50, 
-        "00:" + MyGame.TIME_LIMIT, {font: "60px Arial", fill: "#fff", align: "center"}); 
-      me.timeLabel.anchor.set(0.5);
-      me.timeLabel.fixedToCamera = true;       
-    }
+    if (me.timeLabel) me.timeLabel.destroy();
+
+    me.timeLabel = me.add.text(Math.round(me.game.width/2), 50, 
+      "00:" + MyGame.TIME_LIMIT, {font: "60px Arial", fill: "#fff", align: "center"}); 
+    me.timeLabel.anchor.set(0.5);
+    me.timeLabel.fixedToCamera = true; 
 
     me.time.events.loop(Phaser.Timer.SECOND, me.updateTimer, me);
   },
@@ -159,7 +154,7 @@ MyGame.Play.prototype = {
 
     me.timeElapsed++;
     if (me.timeElapsed > MyGame.TIME_LIMIT) {
-      me.gameOver();
+      me.state.start('GameOver');
     } else {     
       var timeRemaining = MyGame.TIME_LIMIT - me.timeElapsed;
       var minutes = (timeRemaining < 10) ? "0" + timeRemaining : timeRemaining;
@@ -172,11 +167,13 @@ MyGame.Play.prototype = {
     var me = this;
     me.physics.arcade.collide(me.player, me.groundLayer);
     me.physics.arcade.overlap(me.player, me.enemyGroup, me.playerHit, null, me);
-    me.physics.arcade.overlap(me.player, me.checkPoint, me.gameOver, null, me);
+    me.physics.arcade.overlap(me.player, me.checkPoint, me.levelCompleted, null, me);
 
     if (me.player.body.blocked.down) { 
       me.player.body.velocity.x = 250;
       me.player.animations.play('walking');
     }
+
+    if (me.player.x > me.world.width) me.levelCompleted();
   }
 };
