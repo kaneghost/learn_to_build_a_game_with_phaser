@@ -8,16 +8,19 @@ MyGame.Preload.prototype = {
     this.load.tilemap('level2', 'assets/level2.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('tiles', 'assets/tiles.png');
     this.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
+    this.load.image('background', 'assets/background.png');
   },
 
   create: function () {
-    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    this.scale.pageAlignHorizontally = true;
-    this.scale.pageAlignVertically = true;
-    
-    this.physics.startSystem(Phaser.Physics.ARCADE);
-    this.stage.backgroundColor = '#A6E5F5';
+    var me = this;
 
-    this.state.start('Play');
+    me.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    me.scale.pageAlignHorizontally = true;
+    me.scale.pageAlignVertically = true;
+    
+    me.physics.startSystem(Phaser.Physics.ARCADE);
+    // me.stage.backgroundColor = '#A6E5F5';
+
+    me.state.start('Play');
   }
 };

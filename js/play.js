@@ -24,8 +24,10 @@ MyGame.Play.prototype = {
     me.level++;
     if (me.level > MyGame.LEVEL_COUNT) {
       console.log("You've finished all levels!");
-      me.state.start('GameOver');
+      me.state.start('YouWin');
     } else {
+      if (!me.bg) me.bg = me.add.image(0, 0, 'background');
+
       me.createGameMap();
       me.createEnemies();
       me.createCheckPoint();
@@ -83,10 +85,12 @@ MyGame.Play.prototype = {
 
     me.map = me.add.tilemap('level' + me.level);    
     me.map.addTilesetImage('mytileset', 'tiles');
+    // me.map.addTilesetImage('mybackgroundImage', 'background');
 
+    me.backgroundLayer = me.map.createLayer('BackgroundLayer');
     me.groundLayer = me.map.createLayer('GroundLayer');
     me.map.setCollisionBetween(1, 35, true, 'GroundLayer');
-    me.backgroundLayer = me.map.createLayer('BackgroundLayer');
+    
     me.groundLayer.resizeWorld();     
   },
 
