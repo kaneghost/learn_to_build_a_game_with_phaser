@@ -14,4 +14,5 @@
 2. [游戏策划](http://zhongzhu.github.io/2016/03/15/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-2-%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92/)
 3. [用Tiled-Map-Editor来生成游戏场景](http://zhongzhu.github.io/2016/03/25/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-3-%E7%94%A8Tiled-Map-Editor%E6%9D%A5%E7%94%9F%E6%88%90%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/)
 4. [Phaser基础知识](http://zhongzhu.github.io/2016/03/28/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-4-Phaser%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/)
+5. [压缩游戏里的PNG图片](http://zhongzhu.github.io/2016/04/05/%E5%8E%8B%E7%BC%A9%E6%B8%B8%E6%88%8F%E9%87%8C%E7%9A%84PNG%E5%9B%BE%E7%89%87/)
 - ToDo
