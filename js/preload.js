@@ -4,11 +4,15 @@ MyGame.Preload = function () {};
 
 MyGame.Preload.prototype = {    
   preload: function () {
-    this.load.tilemap('level1', 'assets/level1.json', null, Phaser.Tilemap.TILED_JSON);
-    this.load.tilemap('level2', 'assets/level2.json', null, Phaser.Tilemap.TILED_JSON);
-    this.load.image('tiles', 'assets/tiles.png');
-    this.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
-    this.load.image('background', 'assets/background.png');
+    var me = this;
+
+    me.load.tilemap('level1', 'assets/level1.json', null, Phaser.Tilemap.TILED_JSON);
+    me.load.tilemap('level2', 'assets/level2.json', null, Phaser.Tilemap.TILED_JSON);
+    me.load.image('tiles', 'assets/tiles.png');
+    me.load.image('cover', 'assets/cover.png');
+    me.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
+    me.load.image('background', 'assets/background.png');
+    me.game.load.bitmapFont('myfont', 'assets/font/font.png', 'assets/font/font.fnt');
   },
 
   create: function () {
@@ -21,6 +25,6 @@ MyGame.Preload.prototype = {
     me.physics.startSystem(Phaser.Physics.ARCADE);
     // me.stage.backgroundColor = '#A6E5F5';
 
-    me.state.start('Play');
+    me.state.start('MainMenu');
   }
 };

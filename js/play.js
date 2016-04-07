@@ -1,7 +1,7 @@
 var MyGame = MyGame || {};
 
-MyGame.TIME_LIMIT = 20;
-MyGame.LEVEL_COUNT = 1;
+MyGame.TIME_LIMIT = 20; // 20 seconds for each level
+MyGame.LEVEL_COUNT = 2; // the game has 2 levels, for now
 
 MyGame.Play = function () {}; 
 
@@ -141,8 +141,7 @@ MyGame.Play.prototype = {
 
     if (me.timeLabel) me.timeLabel.destroy();
 
-    me.timeLabel = me.add.text(Math.round(me.game.width/2), 50, 
-      "00:" + MyGame.TIME_LIMIT, {font: "60px Arial", fill: "#fff", align: "center"}); 
+    me.timeLabel = me.add.bitmapText(Math.round(me.game.width/2), 70, 'myfont', "00:" + MyGame.TIME_LIMIT, 60); 
     me.timeLabel.anchor.set(0.5);
     me.timeLabel.fixedToCamera = true; 
 
