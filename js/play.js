@@ -1,6 +1,6 @@
 var MyGame = MyGame || {};
 
-MyGame.TIME_LIMIT = 20; // 20 seconds for each level
+MyGame.TIME_LIMIT = 10; // 20 seconds for each level
 MyGame.LEVEL_COUNT = 2; // the game has 2 levels, for now
 
 MyGame.Play = function () {}; 
@@ -37,7 +37,7 @@ MyGame.Play.prototype = {
 
   createBackground: function() {
     var me = this;
-    console.log(me.bg);
+    
     if (me.bg) me.bg.destroy();
     me.bg = me.add.image(0, 0, 'background');
   },
