@@ -153,7 +153,7 @@ MyGame.Play.prototype = {
 
     me.timeElapsed++;
     if (me.timeElapsed > MyGame.TIME_LIMIT) {
-      me.state.start('GameOver');
+      me.state.start('YouLose');
     } else {     
       var timeRemaining = MyGame.TIME_LIMIT - me.timeElapsed;
       var minutes = (timeRemaining < 10) ? "0" + timeRemaining : timeRemaining;

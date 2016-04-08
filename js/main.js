@@ -11,7 +11,7 @@ MyGame.game = new Phaser.Game(newWidth, newHeight, Phaser.AUTO, 'game');
 console.log('Width' + window.innerWidth + 'Height' +  window.innerHeight + 'DPI' + window.devicePixelRatio);
 MyGame.game.state.add('Preload', MyGame.Preload);
 MyGame.game.state.add('MainMenu', MyGame.MainMenu);
-MyGame.game.state.add('GameOver', MyGame.GameOver);
+MyGame.game.state.add('YouLose', MyGame.YouLose);
 MyGame.game.state.add('YouWin', MyGame.YouWin);
 MyGame.game.state.add('Play', MyGame.Play);
 

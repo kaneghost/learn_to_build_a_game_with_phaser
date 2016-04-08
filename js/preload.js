@@ -8,10 +8,9 @@ MyGame.Preload.prototype = {
 
     me.load.tilemap('level1', 'assets/level1.json', null, Phaser.Tilemap.TILED_JSON);
     me.load.tilemap('level2', 'assets/level2.json', null, Phaser.Tilemap.TILED_JSON);
-    me.load.image('tiles', 'assets/tiles.png');
-    me.load.image('cover', 'assets/cover.png');
-    me.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
     me.load.image('background', 'assets/background.png');
+    me.load.image('tiles', 'assets/tiles.png');
+    me.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
     me.game.load.bitmapFont('myfont', 'assets/font/font.png', 'assets/font/font.fnt');
   },
 
