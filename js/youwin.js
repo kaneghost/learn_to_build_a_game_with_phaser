@@ -9,7 +9,7 @@ MyGame.YouWin.prototype = {
   create: function() {
     var me = this;
 
-    me.add.image(0, 0, 'youwin_bg');
+    me.add.image(0, 0, 'texture-atlas', 'youwin_bg');
 
     me.shareBtn = me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2), 'texture-atlas', me.onShare, me, 'share', 'share', 'share', 'share');
     me.shareBtn.anchor.set(0.5);

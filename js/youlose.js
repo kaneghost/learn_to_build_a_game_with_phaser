@@ -9,10 +9,7 @@ MyGame.YouLose.prototype = {
   create: function() {
     var me = this;
 
-    me.add.image(0, 0, 'youlose_bg');
-
-    // me.gameOverLabel = me.add.text(Math.round(me.game.width/2), 100, "好可惜，20秒内没跑完100米", {font: "50px Arial", fill: "#fff", align: "center"}); 
-    // me.gameOverLabel.anchor.set(0.5);   
+    me.add.image(0, 0, 'texture-atlas', 'youlose_bg');
 
     me.restartBtn = me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2 + 50), 'texture-atlas', me.onRestart, me, 'restart', 'restart', 'restart', 'restart');
     me.restartBtn.anchor.set(0.5);

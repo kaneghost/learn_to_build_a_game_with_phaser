@@ -1,6 +1,5 @@
 var MyGame = MyGame || {};
 
-MyGame.TIME_LIMIT = 20; // 20 seconds for each level
 MyGame.LEVEL_COUNT = 2; // the game has 2 levels, for now
 
 MyGame.Play = function () {}; 
@@ -12,7 +11,6 @@ MyGame.Play.prototype = {
   create: function () {
     var me = this;
 
-    me.level = 0;    
     me.loadLevel();
 
     me.input.onDown.add(me.playerJump, me);
@@ -20,20 +18,18 @@ MyGame.Play.prototype = {
 
   loadLevel: function() {
     var me = this;
+    
+    me.level = parseInt(localStorage.level) || 1;
+    if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;
 
-    me.level++;
-    if (me.level > MyGame.LEVEL_COUNT) {
-      me.state.start('YouWin');
-    } else {
-      me.createBackground();
-      me.createGameMap();
-      me.createEnemies();
-      me.createCheckPoint();
-      me.createPlayer();
-      me.createHUD();  
+    me.createBackground();
+    me.createGameMap();
+    me.createEnemies();
+    me.createCheckPoint();
+    me.createPlayer();
+    me.createHUD();  
 
-      me.time.events.loop(Phaser.Timer.SECOND, me.updateHUD, me);
-    }
+    me.time.events.loop(Phaser.Timer.SECOND, me.updateHUD, me);
   },
 
   createHUD: function() {
@@ -151,6 +147,7 @@ MyGame.Play.prototype = {
 
   playerJump: function(point, isDoubleTap) {
     var me = this;
+
     if (me.player.body.blocked.down) {
       me.player.animations.stop();
       me.player.frameName = 'alienBlue_walk2';
@@ -175,8 +172,17 @@ MyGame.Play.prototype = {
     me.player.body.blocked.down = false;
   },
 
-  levelCompleted: function() {    
-    this.loadLevel();
+  levelCompleted: function() {
+    var me = this;
+
+    var nextLevel = me.level + 1;
+    if (nextLevel > MyGame.LEVEL_COUNT) {
+      localStorage.level = 1;
+      me.state.start('YouWin');
+    } else {
+      localStorage.level = nextLevel;
+      me.loadLevel();
+    }
   },
   
   updateHUD: function() {
@@ -192,7 +198,7 @@ MyGame.Play.prototype = {
     me.physics.arcade.overlap(me.player, me.enemyGroup, me.playerHit, null, me);
     me.physics.arcade.overlap(me.player, me.checkPoint, me.levelCompleted, null, me);
 
-    if (me.player.body.blocked.down) { 
+    if (me.player.body.blocked.down) {
       me.player.body.velocity.x = 250;
       me.player.animations.play('walking');
     }
