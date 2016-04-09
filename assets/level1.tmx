@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="33" height="8" tilewidth="70" tileheight="70" nextobjectid="36">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="33" height="8" tilewidth="70" tileheight="70" nextobjectid="40">
  <tileset firstgid="1" name="mytileset" tilewidth="70" tileheight="70" tilecount="35" columns="5">
   <image source="tiles.png" width="350" height="490"/>
  </tileset>
- <tileset firstgid="36" name="enemies" tilewidth="70" tileheight="70" tilecount="3" columns="0">
+ <tileset firstgid="36" name="enemies" tilewidth="70" tileheight="70" tilecount="5" columns="0">
   <tile id="0">
    <image width="51" height="51" source="texture-atlas/blockerMad.png"/>
   </tile>
@@ -13,6 +13,12 @@
   <tile id="3">
    <image width="70" height="70" source="texture-atlas/liquidWaterTop_mid.png"/>
   </tile>
+  <tile id="4">
+   <image width="70" height="70" source="texture-atlas/sign.png"/>
+  </tile>
+  <tile id="5">
+   <image width="70" height="70" source="texture-atlas/signRight.png"/>
+  </tile>
  </tileset>
  <layer name="BackgroundLayer" width="33" height="8">
   <data encoding="csv">
@@ -20,8 +26,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,
-20,25,0,22,6,0,0,0,0,0,0,0,0,0,0,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,25,0,22,6,0,0,0,0,0,0,0,0,0,0,21,0,0,0,0,0,0,0,0,0,0,25,0,0,0,0,0,25,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,14,14,14,14,14,14,14,14,0,0,0,0,0,0,14,14,14,14,0,0,0,0,0,0,0
 </data>
@@ -46,6 +52,7 @@
   <object id="27" name="box" gid="36" x="1276" y="420" width="51" height="51"/>
   <object id="28" name="box" gid="36" x="1531" y="420" width="51" height="51"/>
   <object id="29" name="box" gid="36" x="1550" y="369" width="51" height="51"/>
-  <object id="33" name="flag" gid="38" x="2170" y="420" width="70" height="70"/>
+  <object id="38" name="checkpoint" gid="40" x="2170" y="420" width="70" height="70"/>
+  <object id="39" name="startpoint" gid="41" x="0" y="420" width="70" height="70"/>
  </objectgroup>
 </map>

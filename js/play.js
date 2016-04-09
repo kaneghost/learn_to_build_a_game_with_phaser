@@ -1,6 +1,6 @@
 var MyGame = MyGame || {};
 
-MyGame.TIME_LIMIT = 10; // 20 seconds for each level
+MyGame.TIME_LIMIT = 20; // 20 seconds for each level
 MyGame.LEVEL_COUNT = 2; // the game has 2 levels, for now
 
 MyGame.Play = function () {}; 
@@ -13,7 +13,6 @@ MyGame.Play.prototype = {
     var me = this;
 
     me.level = 0;    
-    console.log('level: ' + me.level);
     me.loadLevel();
 
     me.input.onDown.add(me.playerJump, me);
@@ -31,8 +30,50 @@ MyGame.Play.prototype = {
       me.createEnemies();
       me.createCheckPoint();
       me.createPlayer();
-      me.createTimer(); 
+      me.createHUD();  
+
+      me.time.events.loop(Phaser.Timer.SECOND, me.updateHUD, me);
     }
+  },
+
+  createHUD: function() {
+    var me = this;
+
+    // lives
+    me.lives = me.add.image(50, 50, 'texture-atlas', 'hud_p2');
+    me.lives.anchor.set(0.5);
+    me.lives.fixedToCamera = true;
+
+    me.livesLabel = me.add.bitmapText(me.lives.x + me.lives.width + 12, me.lives.y, 'myfont', ' x ' + me.player.health, 35);  
+    me.livesLabel.anchor.set(0.5);
+    me.livesLabel.fixedToCamera = true;
+
+    // current meters
+    me.metersLabel = me.add.bitmapText(Math.round(me.game.width/2), me.lives.y, 'myfont', (me.level - 1) * 10 + 'm', 40);  
+    me.metersLabel.anchor.set(0.5);
+    me.metersLabel.fixedToCamera = true; 
+
+    // best meters
+    // me.bestLabel = me.add.bitmapText(20, me.lives.y, 'myfont', 'BEST: 65m', 35);  
+    // me.bestLabel.anchor.set(0, 0.5);
+    // me.bestLabel.fixedToCamera = true;          
+  },
+
+  loseOneLife: function() {
+    var me = this;
+
+    me.player.health--;
+    if (me.player.health <= 0) {
+      me.state.start('YouLose');
+    } else {
+      me.livesLabel.text = ' x ' + me.player.health;
+    }
+  },
+
+  updateMeters: function() {
+    var me = this;
+    
+    me.metersLabel.text = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width) + 'm';
   },
 
   createBackground: function() {
@@ -47,27 +88,36 @@ MyGame.Play.prototype = {
 
     if (me.player) me.player.destroy();
 
-    me.player = me.add.sprite(60, 60, 'texture-atlas', 'alienBlue_walk2');
+    me.player = me.add.sprite(60, 150, 'texture-atlas', 'alienBlue_walk2');
     me.player.anchor.setTo(0.5, 0.5);
     me.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 5, true);
 
     me.physics.arcade.enable(me.player);
     me.player.body.gravity.y = 1000;
     me.camera.follow(me.player);
+
+    me.player.health = 3;
   },
 
   createCheckPoint: function() {
     var me = this;
 
+    if (me.startPoint) me.startPoint.destroy();
     if (me.checkPoint) me.checkPoint.destroy();
 
-    // make the yellow flag as our check point
+    me.startPoint = me.game.add.group();
+    me.startPoint.enableBody = true;
+    me.map.createFromObjects('ObjectLayer', 'startpoint', 'texture-atlas', 'signRight', true, false, me.startPoint);    
+
+    var pos = me.startPoint.getAt(0).position;
+    me.add.bitmapText(pos.x, pos.y + 12, 'myfont', (me.level - 1) * 10 + 'm', 24);    
+
     me.checkPoint = me.game.add.group();
     me.checkPoint.enableBody = true;
-    me.map.createFromObjects('ObjectLayer', 'flag', 'texture-atlas', 'flagYellow', true, false, me.checkPoint);
-    
-    me.checkPoint.callAll('animations.add', 'animations', 'fluttering', ['flagYellow', 'flagYellow2'], 3, true);
-    me.checkPoint.callAll('animations.play', 'animations', 'fluttering');    
+    me.map.createFromObjects('ObjectLayer', 'checkpoint', 'texture-atlas', 'sign', true, false, me.checkPoint);    
+
+    pos = me.checkPoint.getAt(0).position;
+    me.add.bitmapText(pos.x, pos.y + 12, 'myfont', me.level * 10 + 'm', 24);  
   },
 
   createEnemies: function() {
@@ -108,8 +158,8 @@ MyGame.Play.prototype = {
     }
   },
 
-  playerHit: function(player, enemy) {
-    console.log('I hit: ' + enemy.name);    
+  playerHit: function(player, enemy) {    
+    this.loseOneLife();
     this.initPlayer();
   },
 
@@ -118,7 +168,7 @@ MyGame.Play.prototype = {
 
     me.player.animations.stop();
     me.player.x = 60;
-    me.player.y = 60;
+    me.player.y = 150;
     me.player.body.velocity.x = 0;
     me.player.body.velocity.y = 0;
 
@@ -126,44 +176,18 @@ MyGame.Play.prototype = {
   },
 
   levelCompleted: function() {    
-    this.stopTimer();
-
     this.loadLevel();
   },
-
-  stopTimer: function() {
-    this.time.events.removeAll();
-  },
-
-  createTimer: function(){
-    var me = this;
-    me.timeElapsed = 0;
-
-    if (me.timeLabel) me.timeLabel.destroy();
-
-    me.timeLabel = me.add.bitmapText(Math.round(me.game.width/2), 70, 'myfont', "00:" + MyGame.TIME_LIMIT, 60); 
-    me.timeLabel.anchor.set(0.5);
-    me.timeLabel.fixedToCamera = true; 
-
-    me.time.events.loop(Phaser.Timer.SECOND, me.updateTimer, me);
-  },
   
-  updateTimer: function() {
+  updateHUD: function() {
     var me = this;
 
-    me.timeElapsed++;
-    if (me.timeElapsed > MyGame.TIME_LIMIT) {
-      me.state.start('YouLose');
-    } else {     
-      var timeRemaining = MyGame.TIME_LIMIT - me.timeElapsed;
-      var minutes = (timeRemaining < 10) ? "0" + timeRemaining : timeRemaining;
-
-      me.timeLabel.text = '00:' + minutes;
-    }
+    me.updateMeters();
   },
 
   update: function() {
     var me = this;
+
     me.physics.arcade.collide(me.player, me.groundLayer);
     me.physics.arcade.overlap(me.player, me.enemyGroup, me.playerHit, null, me);
     me.physics.arcade.overlap(me.player, me.checkPoint, me.levelCompleted, null, me);
@@ -173,6 +197,6 @@ MyGame.Play.prototype = {
       me.player.animations.play('walking');
     }
 
-    if (me.player.x > me.world.width) me.levelCompleted();
+    if (me.player.x > me.world.width) me.levelCompleted();    
   }
 };
