@@ -26,7 +26,7 @@ MyGame.Play.prototype = {
     me.createBackground();
     me.createGameMap();
     me.createEnemies();
-    me.createCheckPoint();
+    me.createStartAndCheckPoint();
     me.createPlayer();
     me.createHUD();
     me.createSound();
@@ -118,24 +118,19 @@ MyGame.Play.prototype = {
     me.player.alive = true;
   },  
 
-  createCheckPoint: function() {
+  createStartAndCheckPoint: function() {
     var me = this;
 
-    if (me.startPoint) me.startPoint.destroy();
-    if (me.checkPoint) me.checkPoint.destroy();
+    if (me.startAndCheckPoint) me.startAndCheckPoint.destroy();
 
-    me.startPoint = me.game.add.group();
-    me.startPoint.enableBody = true;
-    me.map.createFromObjects('ObjectLayer', 'startpoint', 'texture-atlas', 'signRight', true, false, me.startPoint);    
+    me.startAndCheckPoint = me.game.add.group();
+    me.map.createFromObjects('ObjectLayer', 'startpoint', 'texture-atlas', 'signRight', true, false, me.startAndCheckPoint);    
+    me.map.createFromObjects('ObjectLayer', 'checkpoint', 'texture-atlas', 'sign', true, false, me.startAndCheckPoint);    
 
-    var pos = me.startPoint.getAt(0).position;
+    var pos = me.startAndCheckPoint.getAt(0).position;
     me.add.bitmapText(pos.x, pos.y + 12, 'myfont', (me.level - 1) * 10 + 'm', 24);    
 
-    me.checkPoint = me.game.add.group();
-    me.checkPoint.enableBody = true;
-    me.map.createFromObjects('ObjectLayer', 'checkpoint', 'texture-atlas', 'sign', true, false, me.checkPoint);    
-
-    pos = me.checkPoint.getAt(0).position;
+    pos = me.startAndCheckPoint.getAt(1).position;
     me.add.bitmapText(pos.x, pos.y + 12, 'myfont', me.level * 10 + 'm', 24);  
   },
 
