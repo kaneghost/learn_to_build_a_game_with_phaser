@@ -12,12 +12,33 @@ MyGame.Preload.prototype = {
     me.load.image('tiles', 'assets/tiles.png');
     me.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
     me.game.load.bitmapFont('myfont', 'assets/font.png', 'assets/font.fnt');
+    me.load.audio('hit', 'assets/hit.wav');
+    me.load.audio('jump', 'assets/jump.wav');    
+    me.load.audio('music', 'assets/bg6.wav');
+    me.load.audio('completed', 'assets/c2.wav');
+
+    me.game.time.advancedTiming = true;
   },
 
   create: function () {
     var me = this;
 
-    me.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    // handle screen scale
+    if (me.game.device.desktop) {
+      // desktop: do nothing
+    } else {
+      if (window.innerWidth < window.innerHeight) {
+        // mobile portrait mode: do nothing
+      } else {
+        // mobile landscape mode
+        var newWidth = (window.innerWidth/window.innerHeight) * targetHeight;
+        me.scale.setGameSize(newWidth, targetHeight);
+      }
+
+      me.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;      
+    }
+
+    // centralize the game on screen
     me.scale.pageAlignHorizontally = true;
     me.scale.pageAlignVertically = true;
     

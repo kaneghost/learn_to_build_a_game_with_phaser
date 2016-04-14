@@ -9,13 +9,12 @@ MyGame.YouLose.prototype = {
   create: function() {
     var me = this;
 
-    me.add.image(0, 0, 'texture-atlas', 'youlose_bg');
-
-    me.restartBtn = me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2 + 50), 'texture-atlas', me.onRestart, me, 'restart', 'restart', 'restart', 'restart');
-    me.restartBtn.anchor.set(0.5);
-
-    me.menuBtn = me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 150, 'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu');
-    me.menuBtn.anchor.set(0.5);    
+    me.add.image(Math.round(me.game.width/2), Math.round(me.game.height/2), 
+      'texture-atlas', 'youlose_bg').anchor.set(0.5);
+    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2 + 50), 
+      'texture-atlas', me.onRestart, me, 'restart', 'restart', 'restart', 'restart').anchor.set(0.5);
+    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 150, 
+      'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);    
   },
 
   onRestart: function() {

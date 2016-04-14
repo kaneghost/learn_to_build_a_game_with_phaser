@@ -9,13 +9,12 @@ MyGame.YouWin.prototype = {
   create: function() {
     var me = this;
 
-    me.add.image(0, 0, 'texture-atlas', 'youwin_bg');
-
-    me.shareBtn = me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2), 'texture-atlas', me.onShare, me, 'share', 'share', 'share', 'share');
-    me.shareBtn.anchor.set(0.5);
-
-    me.menuBtn = me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 100, 'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu');
-    me.menuBtn.anchor.set(0.5);
+    me.add.image(Math.round(me.game.width/2), Math.round(me.game.height/2), 
+      'texture-atlas', 'youwin_bg').anchor.set(0.5);
+    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2), 
+      'texture-atlas', me.onShare, me, 'share', 'share', 'share', 'share').anchor.set(0.5);
+    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 100, 
+      'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);    
   },
 
   onShare: function() {

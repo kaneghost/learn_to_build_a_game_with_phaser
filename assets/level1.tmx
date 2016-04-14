@@ -46,8 +46,11 @@
  </layer>
  <objectgroup name="ObjectLayer">
   <object id="5" name="box" gid="36" x="540" y="420" width="51" height="51"/>
-  <object id="6" name="box" gid="36" x="840.5" y="420" width="51" height="51"/>
-  <object id="7" name="box" gid="36" x="840.5" y="367.5" width="51" height="51"/>
+  <object id="7" name="box" gid="36" x="840.5" y="367.5" width="51" height="51">
+   <properties>
+    <property name="scale.y" value="2"/>
+   </properties>
+  </object>
   <object id="15" name="box" gid="36" x="1225" y="420" width="51" height="51"/>
   <object id="27" name="box" gid="36" x="1276" y="420" width="51" height="51"/>
   <object id="28" name="box" gid="36" x="1531" y="420" width="51" height="51"/>
