@@ -14,7 +14,7 @@ MyGame.Play.prototype = {
     me.loadLevel();
 
     me.input.onDown.add(me.playerJump, me);
-    me.cursors = me.input.keyboard.createCursorKeys();
+    me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.playerJump, me);
   },
 
   loadLevel: function() {
@@ -215,10 +215,6 @@ MyGame.Play.prototype = {
       if (me.player.body.blocked.down) {
         me.player.body.velocity.x = 250;
         me.player.animations.play('walking');
-      }
-
-      if (me.cursors.up.isDown && me.player.body.blocked.down) {
-        me.playerJump();
       }
 
       if (me.player.x > me.world.width) me.levelCompleted();    
