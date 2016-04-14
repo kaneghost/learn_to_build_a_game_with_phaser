@@ -12,10 +12,10 @@ MyGame.Preload.prototype = {
     me.load.image('tiles', 'assets/tiles.png');
     me.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
     me.game.load.bitmapFont('myfont', 'assets/font.png', 'assets/font.fnt');
-    me.load.audio('hit', 'assets/hit.wav');
-    me.load.audio('jump', 'assets/jump.wav');    
-    me.load.audio('music', 'assets/bg6.wav');
-    me.load.audio('completed', 'assets/c2.wav');
+    me.load.audio('hit', 'assets/hit.mp3');
+    me.load.audio('jump', 'assets/jump.mp3');    
+    me.load.audio('music', 'assets/bg.mp3');
+    me.load.audio('completed', 'assets/completed.mp3');
 
     me.game.time.advancedTiming = true;
   },
