@@ -1,6 +1,9 @@
 var MyGame = MyGame || {};
 
 MyGame.LEVEL_COUNT = 2; // the game has 2 levels, for now
+MyGame.PLAYER_GRAVITY_Y = 1100;//1000
+MyGame.PLAYER_VELOCITY_X = 280;//250;
+MyGame.PLAYER_VELOCITY_Y = -550;
 
 MyGame.Play = function () {}; 
 
@@ -100,7 +103,7 @@ MyGame.Play.prototype = {
     me.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 5, true);
 
     me.physics.arcade.enable(me.player);
-    me.player.body.gravity.y = 1000;
+    me.player.body.gravity.y = MyGame.PLAYER_GRAVITY_Y;
     me.camera.follow(me.player);
     me.player.health = 3;
   },
@@ -166,16 +169,16 @@ MyGame.Play.prototype = {
     var me = this;
 
     if (me.player.body.blocked.down) {
-      this.s_jump.play('', 0, 1);       
+      this.s_jump.play('', 0, 0.5);       
       me.player.animations.stop();
       me.player.frameName = 'alienBlue_walk2';
-      me.player.body.velocity.y = -550;
+      me.player.body.velocity.y = MyGame.PLAYER_VELOCITY_Y;
     }
   },
 
   playerHit: function(player, enemy) { 
     player.alive = false;
-    this.s_hit.play('', 0, 1); 
+    this.s_hit.play('', 0, 0.5); 
 
     this.loseOneLife();
     this.initPlayer();
@@ -213,7 +216,7 @@ MyGame.Play.prototype = {
       me.physics.arcade.overlap(me.player, me.enemyGroup, me.playerHit, null, me);
 
       if (me.player.body.blocked.down) {
-        me.player.body.velocity.x = 250;
+        me.player.body.velocity.x = MyGame.PLAYER_VELOCITY_X;
         me.player.animations.play('walking');
       }
 
