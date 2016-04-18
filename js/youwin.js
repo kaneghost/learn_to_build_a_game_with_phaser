@@ -15,6 +15,8 @@ MyGame.YouWin.prototype = {
       'texture-atlas', me.onShare, me, 'share', 'share', 'share', 'share').anchor.set(0.5);
     me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 100, 
       'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);    
+
+    me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.onMainMenu, me);
   },
 
   onShare: function() {

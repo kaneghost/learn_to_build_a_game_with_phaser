@@ -1,9 +1,9 @@
 var MyGame = MyGame || {};
 
-MyGame.LEVEL_COUNT = 2; // the game has 2 levels, for now
+MyGame.LEVEL_COUNT = 1; // the game has 2 levels, for now
 MyGame.PLAYER_GRAVITY_Y = 1100;//1000
-MyGame.PLAYER_VELOCITY_X = 280;//250;
-MyGame.PLAYER_VELOCITY_Y = -550;
+MyGame.PLAYER_VELOCITY_X = 260;//250;
+MyGame.PLAYER_VELOCITY_Y = 550;
 
 MyGame.Play = function () {}; 
 
@@ -26,13 +26,13 @@ MyGame.Play.prototype = {
     me.level = parseInt(localStorage.level) || 1;
     if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;
 
-    me.createBackground();
-    me.createGameMap();
-    me.createEnemies();
-    me.createStartAndCheckPoint();
-    me.createPlayer();
-    me.createHUD();
-    me.createSound();
+    me.level = 2;
+
+    me.setupBackground();
+    me.setupEnemies();
+    me.setupPlayer();
+    me.setupHUD();
+    me.setupSound();
 
     me.time.events.loop(Phaser.Timer.SECOND, me.updateHUD, me);
   },
@@ -41,8 +41,10 @@ MyGame.Play.prototype = {
     this.time.events.removeAll();
   },
 
-  createSound: function() {
+  setupSound: function() {
     var me = this;
+
+    me.sound.volume = 0.3;
 
     if (me.s_music) me.s_music.destroy();
     me.s_music = me.add.audio('music');
@@ -53,7 +55,7 @@ MyGame.Play.prototype = {
     if (!me.s_completed) me.s_completed = me.add.audio('completed');
   },
 
-  createHUD: function() {
+  setupHUD: function() {
     var me = this;
 
     // lives
@@ -87,23 +89,52 @@ MyGame.Play.prototype = {
     }
   },
 
-  createBackground: function() {
+  setupBackground: function() {
     var me = this;
     
+    // background image
     if (me.bg) me.bg.destroy();
     me.bg = me.add.image(0, 0, 'background');
+
+    // tile map
+    if (me.groundLayer) me.groundLayer.destroy();
+    if (me.backgroundLayer) me.backgroundLayer.destroy();
+    if (me.map) me.map.destroy();
+
+    me.map = me.add.tilemap('level' + me.level);    
+    me.map.addTilesetImage('mytileset', 'tiles');
+
+    me.backgroundLayer = me.map.createLayer('BackgroundLayer');
+    me.groundLayer = me.map.createLayer('GroundLayer');
+    me.map.setCollisionBetween(1, 35, true, 'GroundLayer');
+    
+    me.groundLayer.resizeWorld();
+
+    // start point and check point
+    if (me.startAndCheckPoint) me.startAndCheckPoint.destroy();
+
+    me.startAndCheckPoint = me.game.add.group();
+    me.map.createFromObjects('ObjectLayer', 'startpoint', 'texture-atlas', 'signRight', true, false, me.startAndCheckPoint);    
+    me.map.createFromObjects('ObjectLayer', 'checkpoint', 'texture-atlas', 'sign', true, false, me.startAndCheckPoint);    
+
+    var pos = me.startAndCheckPoint.getAt(0).position;
+    me.add.bitmapText(pos.x, pos.y + 12, 'myfont', (me.level - 1) * 10 + 'm', 24);    
+
+    pos = me.startAndCheckPoint.getAt(1).position;
+    me.add.bitmapText(pos.x, pos.y + 12, 'myfont', me.level * 10 + 'm', 24);       
   },
 
-  createPlayer: function() {
+  setupPlayer: function() {
     var me = this;
 
     if (me.player) me.player.destroy();
 
     me.player = me.add.sprite(60, 150, 'texture-atlas', 'alienBlue_walk2');
     me.player.anchor.setTo(0.5, 0.5);
-    me.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 5, true);
+    me.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 4, true);
 
     me.physics.arcade.enable(me.player);
+    me.player.body.setSize(38, 84);
     me.player.body.gravity.y = MyGame.PLAYER_GRAVITY_Y;
     me.camera.follow(me.player);
     me.player.health = 3;
@@ -120,66 +151,35 @@ MyGame.Play.prototype = {
 
     me.player.body.blocked.down = false;
     me.player.alive = true;
-  },  
+  }, 
 
-  createStartAndCheckPoint: function() {
-    var me = this;
-
-    if (me.startAndCheckPoint) me.startAndCheckPoint.destroy();
-
-    me.startAndCheckPoint = me.game.add.group();
-    me.map.createFromObjects('ObjectLayer', 'startpoint', 'texture-atlas', 'signRight', true, false, me.startAndCheckPoint);    
-    me.map.createFromObjects('ObjectLayer', 'checkpoint', 'texture-atlas', 'sign', true, false, me.startAndCheckPoint);    
-
-    var pos = me.startAndCheckPoint.getAt(0).position;
-    me.add.bitmapText(pos.x, pos.y + 12, 'myfont', (me.level - 1) * 10 + 'm', 24);    
-
-    pos = me.startAndCheckPoint.getAt(1).position;
-    me.add.bitmapText(pos.x, pos.y + 12, 'myfont', me.level * 10 + 'm', 24);  
-  },
-
-  createEnemies: function() {
+  setupEnemies: function() {
     var me = this;
 
     if (me.enemyGruop) me.enemyGruop.destroy();
 
-    // create our enemies, put them in a group
+    // put enemies into a group
     me.enemyGroup = me.game.add.group();
     me.enemyGroup.enableBody = true;
-    me.map.createFromObjects('ObjectLayer', 'box', 'texture-atlas', 'blockerMad', true, false, me.enemyGroup);
-  },
-
-  createGameMap: function() {
-    var me = this;
-
-    if (me.groundLayer) me.groundLayer.destroy();
-    if (me.backgroundLayer) me.backgroundLayer.destroy();
-    if (me.map) me.map.destroy();
-
-    me.map = me.add.tilemap('level' + me.level);    
-    me.map.addTilesetImage('mytileset', 'tiles');
-
-    me.backgroundLayer = me.map.createLayer('BackgroundLayer');
-    me.groundLayer = me.map.createLayer('GroundLayer');
-    me.map.setCollisionBetween(1, 35, true, 'GroundLayer');
-    
-    me.groundLayer.resizeWorld();   
+    me.map.createFromObjects('ObjectLayer', 'box', 'texture-atlas', 'blockerMad', true, false, 
+      me.enemyGroup, Phaser.Sprite, false);
+    me.enemyGroup.setAll('anchor.y', 1);    
   },
 
   playerJump: function(point, isDoubleTap) {
     var me = this;
 
     if (me.player.body.blocked.down) {
-      this.s_jump.play('', 0, 0.5);       
+      this.s_jump.play();       
       me.player.animations.stop();
       me.player.frameName = 'alienBlue_walk2';
-      me.player.body.velocity.y = MyGame.PLAYER_VELOCITY_Y;
+      me.player.body.velocity.y = -MyGame.PLAYER_VELOCITY_Y;
     }
   },
 
   playerHit: function(player, enemy) { 
     player.alive = false;
-    this.s_hit.play('', 0, 0.5); 
+    this.s_hit.play(); 
 
     this.loseOneLife();
     this.initPlayer();
@@ -226,6 +226,9 @@ MyGame.Play.prototype = {
   },
 
   render: function() {
-    this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
+    var me = this;
+    me.game.debug.text(me.game.time.fps || '--', 2, 14, "#00ff00");
+    me.game.debug.body(me.player, '#fc2929', false);
+    me.enemyGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
   }  
 };

@@ -20,6 +20,7 @@ MyGame.MainMenu.prototype = {
     me.game.add.tween(startLabel).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true, 0, -1, true);
 
     me.input.onDown.add(me.onClick, me);
+    me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.onClick, me);
   },
 
   onClick: function() {
