@@ -26,7 +26,7 @@ MyGame.Play.prototype = {
     me.level = parseInt(localStorage.level) || 1;
     if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;
 
-    me.level = 2;
+    me.level = 3;
 
     me.setupBackground();
     me.setupEnemies();
