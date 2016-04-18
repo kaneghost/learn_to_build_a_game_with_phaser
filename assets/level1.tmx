@@ -26,8 +26,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,25,0,22,6,0,0,0,25,0,0,0,0,0,0,0,25,0,0,0,0,0,0,0,0,0,21,0,0,0,0,0,25,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,
+0,25,0,22,6,0,0,0,25,0,0,0,0,0,0,0,25,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,9,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,14,14,14,14,14,14,14,14,0,0,0,0,0,0,14,14,14,14,0,0,0,0,0,0,0
 </data>
@@ -46,27 +46,23 @@
  </layer>
  <objectgroup name="ObjectLayer">
   <object id="5" name="box" gid="36" x="465" y="420" width="51" height="51"/>
-  <object id="15" name="box" gid="36" x="700" y="420" width="51" height="51"/>
-  <object id="27" name="box" gid="36" x="751" y="420" width="51" height="51"/>
+  <object id="15" name="box" gid="36" x="700" y="420" width="51" height="51">
+   <properties>
+    <property name="scale.x" value="2"/>
+   </properties>
+  </object>
   <object id="28" name="box" gid="36" x="1025" y="420" width="51" height="51"/>
   <object id="29" name="box" gid="36" x="1327" y="369" width="51" height="51"/>
   <object id="38" name="checkpoint" gid="40" x="2170" y="420" width="70" height="70"/>
   <object id="39" name="startpoint" gid="41" x="0" y="420" width="70" height="70"/>
-  <object id="44" name="box" gid="36" x="1583" y="420" width="51" height="25.5">
+  <object id="44" name="box" gid="36" x="1610" y="420" width="51" height="51">
    <properties>
-    <property name="scale.y" value="0.5"/>
-   </properties>
-  </object>
-  <object id="45" name="box" gid="36" x="1634" y="420" width="51" height="51"/>
-  <object id="46" name="box" gid="36" x="1685" y="420" width="51" height="25.5">
-   <properties>
-    <property name="scale.y" value="0.5"/>
+    <property name="scale.x" value="2"/>
    </properties>
   </object>
   <object id="47" name="box" gid="36" x="1308" y="420" width="51" height="51"/>
   <object id="49" name="box" gid="36" x="1025" y="369" width="51" height="51"/>
   <object id="50" name="box" gid="36" x="1987" y="369" width="51" height="51"/>
   <object id="51" name="box" gid="36" x="1961" y="420" width="51" height="51"/>
-  <object id="52" name="box" gid="36" x="2012" y="420" width="51" height="51"/>
  </objectgroup>
 </map>

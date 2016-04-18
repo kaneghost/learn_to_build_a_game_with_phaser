@@ -1,6 +1,6 @@
 var MyGame = MyGame || {};
 
-MyGame.LEVEL_COUNT = 1; // the game has 2 levels, for now
+MyGame.LEVEL_COUNT = 2; // the game has 2 levels, for now
 MyGame.PLAYER_GRAVITY_Y = 1100;//1000
 MyGame.PLAYER_VELOCITY_X = 260;//250;
 MyGame.PLAYER_VELOCITY_Y = 550;
