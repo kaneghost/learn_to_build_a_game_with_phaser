@@ -44,7 +44,8 @@ MyGame.Play.prototype = {
   createSound: function() {
     var me = this;
 
-    if (!me.s_music) me.s_music = me.add.audio('music');
+    if (me.s_music) me.s_music.destroy();
+    me.s_music = me.add.audio('music');
     me.s_music.play('', 0, 0.3, true);
     
     if (!me.s_hit) me.s_hit = me.add.audio('hit');
