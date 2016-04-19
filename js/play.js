@@ -1,6 +1,6 @@
 var MyGame = MyGame || {};
 
-MyGame.LEVEL_COUNT = 5; // the game has 2 levels, for now
+MyGame.LEVEL_COUNT = 6; // the game has 2 levels, for now
 MyGame.PLAYER_GRAVITY_Y = 1100;//1000
 MyGame.PLAYER_VELOCITY_X = 260;//250;
 MyGame.PLAYER_VELOCITY_Y = 550;
@@ -23,7 +23,7 @@ MyGame.Play.prototype = {
   loadLevel: function() {
     var me = this;
 
-    localStorage.level = 5; // debug
+    localStorage.level = 6; // debug
 
     me.level = parseInt(localStorage.level) || 1;
     if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;
