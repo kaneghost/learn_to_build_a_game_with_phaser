@@ -22,7 +22,7 @@ MyGame.Play.prototype = {
 
   loadLevel: function() {
     var me = this;
-    localStorage.level = 4;
+    localStorage.level = 1;
 
     me.level = parseInt(localStorage.level) || 1;
     if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;
@@ -156,13 +156,21 @@ MyGame.Play.prototype = {
     var me = this;
 
     if (me.enemyGruop) me.enemyGruop.destroy();
+    if (me.fishGroup) me.fishGroup.destroy();
 
     // put enemies into a group
     me.enemyGroup = me.game.add.group();
     me.enemyGroup.enableBody = true;
     me.map.createFromObjects('ObjectLayer', 'box', 'texture-atlas', 'blockerMad', true, false, 
       me.enemyGroup, Phaser.Sprite, false);
-    me.enemyGroup.setAll('anchor.y', 1);    
+    me.enemyGroup.setAll('anchor.y', 1); 
+
+    // fish
+    me.fishGroup = me.game.add.group();
+    me.fishGroup.enableBody = true;
+    me.map.createFromObjects('ObjectLayer', 'fish', 'texture-atlas', 'fishSwim1', true, false, me.fishGroup);
+    me.fishGroup.callAll('animations.add', 'animations', 'fish_swimming', ['fishSwim1', 'fishSwim2'], 4, true);
+    me.fishGroup.callAll('animations.play', 'animations', 'fish_swimming');
   },
 
   playerJump: function(point, isDoubleTap) {
@@ -216,6 +224,7 @@ MyGame.Play.prototype = {
     if (me.player && me.player.alive) {
       me.physics.arcade.collide(me.player, me.groundLayer);
       me.physics.arcade.overlap(me.player, me.enemyGroup, me.playerHit, null, me);
+      me.physics.arcade.overlap(me.player, me.fishGroup, me.playerHit, null, me);
 
       if (me.player.body.blocked.down) {
         me.player.body.velocity.x = MyGame.PLAYER_VELOCITY_X;
@@ -223,7 +232,6 @@ MyGame.Play.prototype = {
       }
 
       if (me.player.x > me.world.width) me.levelCompleted();
-      if (me.player.y > me.world.height) me.playerHit();    
     }
   },
 
@@ -232,5 +240,6 @@ MyGame.Play.prototype = {
     me.game.debug.text(me.game.time.fps || '--', 2, 14, "#00ff00");
     me.game.debug.body(me.player, '#fc2929', false);
     me.enemyGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
+    me.fishGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
   }  
 };

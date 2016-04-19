@@ -122,6 +122,54 @@
                  "width":51,
                  "x":1242.5,
                  "y":420
+                }, 
+                {
+                 "gid":42,
+                 "height":42,
+                 "id":49,
+                 "name":"fish",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":66,
+                 "x":437.5,
+                 "y":525
+                }, 
+                {
+                 "gid":42,
+                 "height":42,
+                 "id":50,
+                 "name":"fish",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":66,
+                 "x":1015,
+                 "y":542.5
+                }, 
+                {
+                 "gid":42,
+                 "height":42,
+                 "id":52,
+                 "name":"fish",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":66,
+                 "x":1540,
+                 "y":525
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -130,7 +178,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":49,
+ "nextobjectid":54,
  "orientation":"orthogonal",
  "properties":
     {
@@ -166,7 +214,7 @@
 
             },
          "spacing":0,
-         "tilecount":4,
+         "tilecount":5,
          "tileheight":70,
          "tiles":
             {
@@ -185,6 +233,10 @@
              "5":
                 {
                  "image":"texture-atlas\/signRight.png"
+                },
+             "6":
+                {
+                 "image":"texture-atlas\/fishSwim1.png"
                 }
             },
          "tilewidth":70

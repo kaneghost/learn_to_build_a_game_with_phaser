@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="33" height="8" tilewidth="70" tileheight="70" nextobjectid="49">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="33" height="8" tilewidth="70" tileheight="70" nextobjectid="54">
  <tileset firstgid="1" name="mytileset" tilewidth="70" tileheight="70" tilecount="35" columns="5">
   <image source="tiles.png" width="350" height="490"/>
  </tileset>
- <tileset firstgid="36" name="enemies" tilewidth="70" tileheight="70" tilecount="4" columns="0">
+ <tileset firstgid="36" name="enemies" tilewidth="70" tileheight="70" tilecount="5" columns="0">
   <tile id="0">
    <image width="51" height="51" source="texture-atlas/blockerMad.png"/>
   </tile>
@@ -15,6 +15,9 @@
   </tile>
   <tile id="5">
    <image width="70" height="70" source="texture-atlas/signRight.png"/>
+  </tile>
+  <tile id="6">
+   <image width="66" height="42" source="texture-atlas/fishSwim1.png"/>
   </tile>
  </tileset>
  <layer name="BackgroundLayer" width="33" height="8">
@@ -52,5 +55,8 @@
   <object id="35" name="startpoint" gid="41" x="0" y="420" width="70" height="70"/>
   <object id="45" name="box" gid="36" x="1190" y="420" width="51" height="51"/>
   <object id="48" name="box" gid="36" x="1242.5" y="420" width="51" height="51"/>
+  <object id="49" name="fish" gid="42" x="437.5" y="525" width="66" height="42"/>
+  <object id="50" name="fish" gid="42" x="1015" y="542.5" width="66" height="42"/>
+  <object id="52" name="fish" gid="42" x="1540" y="525" width="66" height="42"/>
  </objectgroup>
 </map>
