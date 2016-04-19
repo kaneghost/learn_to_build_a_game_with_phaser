@@ -1,6 +1,6 @@
 var MyGame = MyGame || {};
 
-MyGame.LEVEL_COUNT = 2; // the game has 2 levels, for now
+MyGame.LEVEL_COUNT = 4; // the game has 2 levels, for now
 MyGame.PLAYER_GRAVITY_Y = 1100;//1000
 MyGame.PLAYER_VELOCITY_X = 260;//250;
 MyGame.PLAYER_VELOCITY_Y = 550;
@@ -22,11 +22,10 @@ MyGame.Play.prototype = {
 
   loadLevel: function() {
     var me = this;
-    
+    localStorage.level = 4;
+
     me.level = parseInt(localStorage.level) || 1;
     if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;
-
-    me.level = 3;
 
     me.setupBackground();
     me.setupEnemies();
@@ -178,11 +177,13 @@ MyGame.Play.prototype = {
   },
 
   playerHit: function(player, enemy) { 
-    player.alive = false;
-    this.s_hit.play(); 
+    var me = this;
 
-    this.loseOneLife();
-    this.initPlayer();
+    me.player.alive = false;
+    me.s_hit.play(); 
+
+    me.loseOneLife();
+    me.initPlayer();
   },
 
   levelCompleted: function() {
@@ -221,7 +222,8 @@ MyGame.Play.prototype = {
         me.player.animations.play('walking');
       }
 
-      if (me.player.x > me.world.width) me.levelCompleted();    
+      if (me.player.x > me.world.width) me.levelCompleted();
+      if (me.player.y > me.world.height) me.playerHit();    
     }
   },
 

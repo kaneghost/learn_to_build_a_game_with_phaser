@@ -50,7 +50,7 @@
                  "name":"box",
                  "properties":
                     {
-                     "scale.x":"2"
+
                     },
                  "rotation":0,
                  "type":"",
@@ -74,22 +74,6 @@
                  "width":51,
                  "x":1025,
                  "y":420
-                }, 
-                {
-                 "gid":36,
-                 "height":51,
-                 "id":29,
-                 "name":"box",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":51,
-                 "x":1327,
-                 "y":369
                 }, 
                 {
                  "gid":40,
@@ -130,13 +114,13 @@
                  "name":"box",
                  "properties":
                     {
-                     "scale.x":"2"
+
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":51,
-                 "x":1610,
+                 "x":1680,
                  "y":420
                 }, 
                 {
@@ -152,7 +136,7 @@
                  "type":"",
                  "visible":true,
                  "width":51,
-                 "x":1308,
+                 "x":1330,
                  "y":420
                 }, 
                 {
@@ -168,8 +152,8 @@
                  "type":"",
                  "visible":true,
                  "width":51,
-                 "x":1025,
-                 "y":369
+                 "x":1076,
+                 "y":420
                 }, 
                 {
                  "gid":36,
@@ -202,6 +186,38 @@
                  "width":51,
                  "x":1961,
                  "y":420
+                }, 
+                {
+                 "gid":36,
+                 "height":51,
+                 "id":53,
+                 "name":"box",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":51,
+                 "x":751,
+                 "y":420
+                }, 
+                {
+                 "gid":36,
+                 "height":51,
+                 "id":55,
+                 "name":"box",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":51,
+                 "x":1629,
+                 "y":420
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -210,7 +226,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":53,
+ "nextobjectid":56,
  "orientation":"orthogonal",
  "properties":
     {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="33" height="8" tilewidth="70" tileheight="70" nextobjectid="53">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="33" height="8" tilewidth="70" tileheight="70" nextobjectid="56">
  <tileset firstgid="1" name="mytileset" tilewidth="70" tileheight="70" tilecount="35" columns="5">
   <image source="tiles.png" width="350" height="490"/>
  </tileset>
@@ -46,23 +46,16 @@
  </layer>
  <objectgroup name="ObjectLayer">
   <object id="5" name="box" gid="36" x="465" y="420" width="51" height="51"/>
-  <object id="15" name="box" gid="36" x="700" y="420" width="51" height="51">
-   <properties>
-    <property name="scale.x" value="2"/>
-   </properties>
-  </object>
+  <object id="15" name="box" gid="36" x="700" y="420" width="51" height="51"/>
   <object id="28" name="box" gid="36" x="1025" y="420" width="51" height="51"/>
-  <object id="29" name="box" gid="36" x="1327" y="369" width="51" height="51"/>
   <object id="38" name="checkpoint" gid="40" x="2170" y="420" width="70" height="70"/>
   <object id="39" name="startpoint" gid="41" x="0" y="420" width="70" height="70"/>
-  <object id="44" name="box" gid="36" x="1610" y="420" width="51" height="51">
-   <properties>
-    <property name="scale.x" value="2"/>
-   </properties>
-  </object>
-  <object id="47" name="box" gid="36" x="1308" y="420" width="51" height="51"/>
-  <object id="49" name="box" gid="36" x="1025" y="369" width="51" height="51"/>
+  <object id="44" name="box" gid="36" x="1680" y="420" width="51" height="51"/>
+  <object id="47" name="box" gid="36" x="1330" y="420" width="51" height="51"/>
+  <object id="49" name="box" gid="36" x="1076" y="420" width="51" height="51"/>
   <object id="50" name="box" gid="36" x="1987" y="369" width="51" height="51"/>
   <object id="51" name="box" gid="36" x="1961" y="420" width="51" height="51"/>
+  <object id="53" name="box" gid="36" x="751" y="420" width="51" height="51"/>
+  <object id="55" name="box" gid="36" x="1629" y="420" width="51" height="51"/>
  </objectgroup>
 </map>

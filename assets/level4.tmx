@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="33" height="8" tilewidth="70" tileheight="70" nextobjectid="49">
+ <tileset firstgid="1" name="mytileset" tilewidth="70" tileheight="70" tilecount="35" columns="5">
+  <image source="tiles.png" width="350" height="490"/>
+ </tileset>
+ <tileset firstgid="36" name="enemies" tilewidth="70" tileheight="70" tilecount="4" columns="0">
+  <tile id="0">
+   <image width="51" height="51" source="texture-atlas/blockerMad.png"/>
+  </tile>
+  <tile id="3">
+   <image width="70" height="70" source="texture-atlas/liquidWaterTop_mid.png"/>
+  </tile>
+  <tile id="4">
+   <image width="70" height="70" source="texture-atlas/sign.png"/>
+  </tile>
+  <tile id="5">
+   <image width="70" height="70" source="texture-atlas/signRight.png"/>
+  </tile>
+ </tileset>
+ <layer name="BackgroundLayer" width="33" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,25,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,12,19,27,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,
+0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,0,0,0,0,0,0,9,
+0,0,0,0,14,14,14,14,0,0,0,0,0,14,14,14,0,0,0,0,14,14,14,14,0,0,0,0,0,0,0,0,0,
+0,0,0,0,16,16,16,16,0,0,0,0,0,16,16,16,0,0,0,0,16,16,16,16,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="GroundLayer" width="33" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,3,24,24,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,34,24,24,7,35,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+24,24,24,24,0,0,0,0,35,24,35,35,35,0,0,0,24,24,24,24,0,0,0,0,24,24,24,24,24,24,24,24,24,
+35,24,35,35,0,0,0,0,35,35,35,24,35,0,0,0,35,35,24,35,0,0,0,0,35,35,24,24,35,35,24,35,35
+</data>
+ </layer>
+ <objectgroup name="ObjectLayer">
+  <object id="15" name="box" gid="36" x="647.5" y="350" width="51" height="51">
+   <properties>
+    <property name="scale.y" value="1.5"/>
+   </properties>
+  </object>
+  <object id="31" name="box" gid="36" x="1950" y="355" width="51" height="51"/>
+  <object id="34" name="checkpoint" gid="40" x="2170" y="420" width="70" height="70"/>
+  <object id="35" name="startpoint" gid="41" x="0" y="420" width="70" height="70"/>
+  <object id="45" name="box" gid="36" x="1190" y="420" width="51" height="51"/>
+  <object id="48" name="box" gid="36" x="1242.5" y="420" width="51" height="51"/>
+ </objectgroup>
+</map>
