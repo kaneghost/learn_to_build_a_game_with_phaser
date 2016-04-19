@@ -1,6 +1,6 @@
 var MyGame = MyGame || {};
 
-MyGame.LEVEL_COUNT = 4; // the game has 2 levels, for now
+MyGame.LEVEL_COUNT = 5; // the game has 2 levels, for now
 MyGame.PLAYER_GRAVITY_Y = 1100;//1000
 MyGame.PLAYER_VELOCITY_X = 260;//250;
 MyGame.PLAYER_VELOCITY_Y = 550;
@@ -22,7 +22,8 @@ MyGame.Play.prototype = {
 
   loadLevel: function() {
     var me = this;
-    localStorage.level = 1;
+
+    localStorage.level = 5; // debug
 
     me.level = parseInt(localStorage.level) || 1;
     if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;
@@ -45,8 +46,7 @@ MyGame.Play.prototype = {
 
     me.sound.volume = 0.3;
 
-    if (me.s_music) me.s_music.destroy();
-    me.s_music = me.add.audio('music');
+    if (!me.s_music) me.s_music = me.add.audio('music');
     me.s_music.play('', 0, 0.3, true);
     
     if (!me.s_hit) me.s_hit = me.add.audio('hit');
@@ -224,7 +224,7 @@ MyGame.Play.prototype = {
     if (me.player && me.player.alive) {
       me.physics.arcade.collide(me.player, me.groundLayer);
       me.physics.arcade.overlap(me.player, me.enemyGroup, me.playerHit, null, me);
-      me.physics.arcade.overlap(me.player, me.fishGroup, me.playerHit, null, me);
+      // me.physics.arcade.overlap(me.player, me.fishGroup, me.playerHit, null, me);
 
       if (me.player.body.blocked.down) {
         me.player.body.velocity.x = MyGame.PLAYER_VELOCITY_X;
@@ -232,6 +232,7 @@ MyGame.Play.prototype = {
       }
 
       if (me.player.x > me.world.width) me.levelCompleted();
+      if (me.player.y > me.world.height) me.playerHit();
     }
   },
 
