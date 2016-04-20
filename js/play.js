@@ -18,7 +18,7 @@ MyGame.Play.prototype = {
   loadLevel: function() {
     var me = this;
 
-    localStorage.level = 7; // debug
+    localStorage.level = 8; // debug
 
     me.level = parseInt(localStorage.level) || 1;
     if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;

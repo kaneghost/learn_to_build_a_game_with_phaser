@@ -1,6 +1,6 @@
 var MyGame = MyGame || {};
 
-MyGame.LEVEL_COUNT = 7; // the game has 10 levels
+MyGame.LEVEL_COUNT = 8; // the game has 10 levels
 MyGame.PLAYER_GRAVITY_Y = 1100;//1000
 MyGame.PLAYER_VELOCITY_X = 260;//250;
 MyGame.PLAYER_VELOCITY_Y = 550;
@@ -19,7 +19,7 @@ MyGame.Preload.prototype = {
     me.load.image('tiles', 'assets/tiles.png');
     me.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
     me.game.load.bitmapFont('myfont', 'assets/font.png', 'assets/font.fnt');
-    
+
     me.load.audio('hit', 'assets/hit.mp3');
     me.load.audio('jump', 'assets/jump.mp3');    
     me.load.audio('music', 'assets/bg.mp3');
