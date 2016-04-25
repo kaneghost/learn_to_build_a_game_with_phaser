@@ -18,8 +18,6 @@ MyGame.Play.prototype = {
   loadLevel: function() {
     var me = this;
 
-    localStorage.level = 8; // debug
-
     me.level = parseInt(localStorage.level) || 1;
     if (me.level < 1 || me.level > MyGame.LEVEL_COUNT) me.level = 1;
 
@@ -131,7 +129,7 @@ MyGame.Play.prototype = {
     me.player.body.setSize(38, 84);
     me.player.body.gravity.y = MyGame.PLAYER_GRAVITY_Y;
     me.camera.follow(me.player);
-    me.player.health = 3;
+    me.player.health = MyGame.PLAYER_MAX_HEALTH;
   },
 
   initPlayer: function() {

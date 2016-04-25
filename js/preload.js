@@ -1,5 +1,6 @@
 var MyGame = MyGame || {};
 
+MyGame.PLAYER_MAX_HEALTH = 1;
 MyGame.LEVEL_COUNT = 8; // the game has 10 levels
 MyGame.PLAYER_GRAVITY_Y = 1100;//1000
 MyGame.PLAYER_VELOCITY_X = 260;//250;
@@ -52,6 +53,8 @@ MyGame.Preload.prototype = {
     
     me.physics.startSystem(Phaser.Physics.ARCADE);
     // me.stage.backgroundColor = '#A6E5F5';
+
+    localStorage.level = 8; // debug
 
     me.state.start('MainMenu');
   }

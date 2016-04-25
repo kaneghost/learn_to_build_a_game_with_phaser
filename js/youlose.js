@@ -11,10 +11,13 @@ MyGame.YouLose.prototype = {
 
     me.add.image(Math.round(me.game.width/2), Math.round(me.game.height/2), 
       'texture-atlas', 'youlose_bg').anchor.set(0.5);
-    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2 + 50), 
+    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 70, 
       'texture-atlas', me.onRestart, me, 'restart', 'restart', 'restart', 'restart').anchor.set(0.5);
-    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 150, 
+    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 160, 
       'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);
+
+    me.bestLabel = me.add.text(Math.round(me.game.width/2) - 100, Math.round(me.game.height/2) - 50, '最好成绩：88米', { font: '26px bold Arial', fill: '#95cb40'});
+    me.triedLabel = me.add.text(Math.round(me.game.width/2) - 100, Math.round(me.game.height/2) - 20, '摔倒了：58次', { font: '26px bold Arial', fill: '#95cb40'});
 
     me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.onRestart, me);   
   },
