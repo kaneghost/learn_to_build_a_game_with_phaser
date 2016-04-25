@@ -132,7 +132,7 @@
                     {
 
                     },
-                 "rotation":0,
+                 "rotation":-10,
                  "type":"",
                  "visible":true,
                  "width":66,
@@ -148,7 +148,7 @@
                     {
 
                     },
-                 "rotation":0,
+                 "rotation":10,
                  "type":"",
                  "visible":true,
                  "width":66,
@@ -169,7 +169,7 @@
                  "visible":true,
                  "width":66,
                  "x":1540,
-                 "y":525
+                 "y":516
                 }],
          "opacity":1,
          "type":"objectgroup",
