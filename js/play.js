@@ -66,6 +66,23 @@ MyGame.Play.prototype = {
     me.metersLabel = me.add.bitmapText(Math.round(me.game.width/2), me.lives.y, 'myfont', (me.level - 1) * 10 + 'm', 40);  
     me.metersLabel.anchor.set(0.5);
     me.metersLabel.fixedToCamera = true;
+
+    // fall times
+    if (me.fallTimesLabel) me.fallTimesLabel.destroy();
+
+    me.fallTimes = 0;
+    for (var i = 1; i <= 10; i++) {
+      me.fallTimes += parseInt(localStorage.getItem('fallTimes' + i)) || 0;
+    }    
+
+    me.fallTimesLabel = me.add.bitmapText(me.game.width - 100, me.lives.y, 'myfont', '#' + me.fallTimes, 35);  
+    me.fallTimesLabel.anchor.set(0.5);
+    me.fallTimesLabel.fixedToCamera = true;
+
+    me.currFallTimes = parseInt(localStorage.getItem('fallTimes' + me.level)) || 0;
+
+    // best
+    me.best = localStorage.best;
   },
 
   loseOneLife: function() {
@@ -74,7 +91,7 @@ MyGame.Play.prototype = {
     me.player.health--;
     if (me.player.health <= 0) {
       me.s_music.pause();
-      me.stopTimer();
+      me.stopTimer();      
       me.state.start('YouLose');
     } else {
       me.livesLabel.text = ' x ' + me.player.health;
@@ -175,10 +192,19 @@ MyGame.Play.prototype = {
       me.player.frameName = 'alienBlue_walk2';
       me.player.body.velocity.y = -MyGame.PLAYER_VELOCITY_Y;
     }
-  },
+  },  
 
   playerHit: function(player, enemy) { 
     var me = this;
+
+    me.currFallTimes++;
+    me.fallTimes++;
+    localStorage.setItem('fallTimes' + me.level, me.currFallTimes);
+
+    var currBest = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width);
+    if (currBest > me.best) {
+      localStorage.best = currBest;  
+    }    
 
     me.player.alive = false;
     me.s_hit.play(); 
@@ -192,6 +218,14 @@ MyGame.Play.prototype = {
     
     me.s_music.pause();
     me.s_completed.play();
+
+    localStorage.setItem('fallTimes' + me.level, me.currFallTimes);
+    localStorage.best = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width);
+
+    var currBest = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width);
+    if (currBest > me.best) {
+      localStorage.best = currBest;  
+    }    
     
     var nextLevel = me.level + 1;
     if (nextLevel > MyGame.LEVEL_COUNT) {
@@ -209,6 +243,9 @@ MyGame.Play.prototype = {
 
     // meters
     me.metersLabel.text = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width) + 'm';
+
+    // fall times
+    me.fallTimesLabel.text = '#' + me.fallTimes;
   },
 
   update: function() {
@@ -217,7 +254,6 @@ MyGame.Play.prototype = {
     if (me.player && me.player.alive) {
       me.physics.arcade.collide(me.player, me.groundLayer);
       me.physics.arcade.overlap(me.player, me.enemyGroup, me.playerHit, null, me);
-      // me.physics.arcade.overlap(me.player, me.fishGroup, me.playerHit, null, me);
 
       if (me.player.body.blocked.down) {
         me.player.body.velocity.x = MyGame.PLAYER_VELOCITY_X;
