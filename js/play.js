@@ -75,14 +75,14 @@ MyGame.Play.prototype = {
       me.fallTimes += parseInt(localStorage.getItem('fallTimes' + i)) || 0;
     }    
 
-    me.fallTimesLabel = me.add.bitmapText(me.game.width - 100, me.lives.y, 'myfont', '#' + me.fallTimes, 35);  
-    me.fallTimesLabel.anchor.set(0.5);
+    me.fallTimesLabel = me.add.bitmapText(me.game.width - 25, me.lives.y, 'myfont', '#' + me.fallTimes, 35);  
+    me.fallTimesLabel.anchor.set(1, 0.5);
     me.fallTimesLabel.fixedToCamera = true;
 
     me.currFallTimes = parseInt(localStorage.getItem('fallTimes' + me.level)) || 0;
 
     // best
-    me.best = localStorage.best;
+    me.best = parseInt(localStorage.best) || 0;
   },
 
   loseOneLife: function() {
@@ -203,8 +203,10 @@ MyGame.Play.prototype = {
 
     var currBest = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width);
     if (currBest > me.best) {
-      localStorage.best = currBest;  
-    }    
+      localStorage.best = currBest;
+      me.best = currBest;
+    }
+    console.log(currBest + ' ' + me.best);
 
     me.player.alive = false;
     me.s_hit.play(); 

@@ -4,6 +4,12 @@ MyGame.YouWin = function () {};
 
 MyGame.YouWin.prototype = {
   preload: function () {
+    var me = this;
+    
+    me.fallTimes = 0;
+    for (var i = 1; i <= 10; i++) {
+      me.fallTimes += parseInt(localStorage.getItem('fallTimes' + i)) || 0;
+    }
   },
 
   create: function() {
@@ -15,7 +21,12 @@ MyGame.YouWin.prototype = {
     me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 70, 
       'texture-atlas', me.onShare, me, 'share', 'share', 'share', 'share').anchor.set(0.5);
     me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 160, 
-      'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);    
+      'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);  
+
+    // me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2) - 20, 
+    //   me.fallTimes + '次跌倒，并没有让你停下来\n   因为你知道，终点，就在前方', 
+    //   { font: '28px bold Arial', fill: '#5F5F5F'}
+    // ).anchor.set(0.5);        
 
     me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.onMainMenu, me);
   },

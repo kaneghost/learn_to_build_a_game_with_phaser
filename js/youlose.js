@@ -24,13 +24,9 @@ MyGame.YouLose.prototype = {
     me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 160, 
       'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);
 
-    me.bestLabel = me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2) - 45, 
-      '最好成绩' + me.best + '米，摔倒' + me.fallTimes + '次', 
-      { font: '26px bold Arial', fill: '#95cb40'}
-    ).anchor.set(0.5);
-    
-    me.triedLabel = me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2) - 12, 
-      '你可以做得更好！', { font: '26px bold Arial', fill: '#95cb40'}
+    me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2) - 20, 
+      '你的最好成绩' + me.best + '米，跌倒' + me.fallTimes + '次\n终点就在前方，加油，fighting！', 
+      { font: '28px bold Arial', fill: '#5F5F5F'}
     ).anchor.set(0.5);
 
     me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.onRestart, me);   
