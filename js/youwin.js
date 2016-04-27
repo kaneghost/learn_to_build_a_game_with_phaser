@@ -19,20 +19,20 @@ MyGame.YouWin.prototype = {
       'texture-atlas', 'youwin_bg').anchor.set(0.5);
 
     me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 70, 
-      'texture-atlas', me.onShare, me, 'share', 'share', 'share', 'share').anchor.set(0.5);
+      'texture-atlas', me.onShare, me, 'photo', 'photo', 'photo', 'photo').anchor.set(0.5);
     me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 160, 
       'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5); 
 
     me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2) - 20, 
       '跌倒' + me.fallTimes + '次', 
       { font: '28px bold Arial', fill: '#999999'}
-    ).anchor.set(0.5);        
+    ).anchor.set(0.5);
 
     me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.onMainMenu, me);
   },
 
   onShare: function() {
-    this.state.start('MainMenu');
+    console.log('save screenshot as a photo');
   },
 
   onMainMenu: function() {
