@@ -201,12 +201,13 @@ MyGame.Play.prototype = {
     me.fallTimes++;
     localStorage.setItem('fallTimes' + me.level, me.currFallTimes);
 
+    me.fallTimesLabel.text = '#' + me.fallTimes;
+
     var currBest = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width);
     if (currBest > me.best) {
       localStorage.best = currBest;
       me.best = currBest;
     }
-    console.log(currBest + ' ' + me.best);
 
     me.player.alive = false;
     me.s_hit.play(); 
@@ -247,7 +248,7 @@ MyGame.Play.prototype = {
     me.metersLabel.text = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width) + 'm';
 
     // fall times
-    me.fallTimesLabel.text = '#' + me.fallTimes;
+    // me.fallTimesLabel.text = '#' + me.fallTimes;
   },
 
   update: function() {
