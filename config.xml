@@ -23,6 +23,7 @@
     
     <platform name="android">
         <plugin name="cordova-plugin-crosswalk-webview" spec="~1.6.1" />
+        <preference name="CrosswalkAnimatable" value="true" />
         <preference name="android-minSdkVersion" value="17"/>
         <preference name="android-targetSdkVersion" value="22"/>
         <allow-intent href="market:*" />

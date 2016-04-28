@@ -26,13 +26,20 @@ MyGame.YouWin.prototype = {
     me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2) - 20, 
       '跌倒' + me.fallTimes + '次', 
       { font: '28px bold Arial', fill: '#999999'}
-    ).anchor.set(0.5);
+      ).anchor.set(0.5);
 
     me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.onMainMenu, me);
   },
 
   onShare: function() {
     console.log('save screenshot as a photo');
+    navigator.screenshot.save(function(error,res){
+      if(error){
+        console.error(error);
+      }else{
+        console.log('ok',res.filePath);
+      }
+    },'jpg',50);
   },
 
   onMainMenu: function() {
