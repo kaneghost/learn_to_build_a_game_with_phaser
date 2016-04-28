@@ -40,7 +40,7 @@ MyGame.Play.prototype = {
     me.sound.volume = 0.3;
 
     if (!me.s_music) me.s_music = me.add.audio('music');
-    me.s_music.play('', 0, 0.3, true);
+    me.s_music.play('', 0, 1, true);
     
     if (!me.s_hit) me.s_hit = me.add.audio('hit');
     if (!me.s_jump) me.s_jump = me.add.audio('jump');
