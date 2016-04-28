@@ -18,10 +18,15 @@ MyGame.YouWin.prototype = {
     me.add.image(Math.round(me.game.width/2), Math.round(me.game.height/2), 
       'texture-atlas', 'youwin_bg').anchor.set(0.5);
 
-    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 70, 
-      'texture-atlas', me.onShare, me, 'photo', 'photo', 'photo', 'photo').anchor.set(0.5);
-    me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 160, 
-      'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5); 
+    if (me.game.device.desktop) {
+      me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 70, 
+        'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5); 
+    } else {
+      me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 70, 
+        'texture-atlas', me.onShare, me, 'photo', 'photo', 'photo', 'photo').anchor.set(0.5);
+      me.add.button(Math.round(me.game.width/2), Math.round(me.game.height/2) + 160, 
+        'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);       
+    }
 
     me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2) - 20, 
       '跌倒' + me.fallTimes + '次', 
@@ -39,7 +44,7 @@ MyGame.YouWin.prototype = {
         console.error(error);
       }else{
         // console.log('ok',res.filePath);
-        var message = me.add.text(Math.round(me.game.width*2/3), Math.round(me.game.height/2), 
+        var message = me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2), 
           '截屏已保存到相册', { font: '28px bold Arial', fill: '#999999'});
 
         var scoreTween = me.game.add.tween(message).to({y: 50}, 800, Phaser.Easing.Exponential.In, true);
