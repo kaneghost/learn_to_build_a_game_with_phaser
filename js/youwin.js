@@ -32,17 +32,32 @@ MyGame.YouWin.prototype = {
   },
 
   onShare: function() {
-    console.log('save screenshot as a photo');
+    var me = this;
+
     navigator.screenshot.save(function(error,res){
       if(error){
         console.error(error);
       }else{
-        console.log('ok',res.filePath);
+        // console.log('ok',res.filePath);
+        var message = me.add.text(Math.round(me.game.width*2/3), Math.round(me.game.height/2), 
+          '截屏已保存到相册', { font: '28px bold Arial', fill: '#999999'});
+
+        var scoreTween = me.game.add.tween(message).to({y: 50}, 800, Phaser.Easing.Exponential.In, true);
+        scoreTween.onComplete.add(function(){ 
+          message.destroy();
+        }, me);
       }
     },'jpg',50);
   },
 
   onMainMenu: function() {
+    // clear HUD data
+    localStorage.level = 1;
+    localStorage.best = 0;
+    for (var i = 1; i <= 10; i++) {
+      localStorage.setItem('fallTimes' + i, 0);
+    }  
+
     this.state.start('MainMenu');
   }
 };

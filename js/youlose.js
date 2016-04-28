@@ -25,7 +25,7 @@ MyGame.YouLose.prototype = {
       'texture-atlas', me.onMainMenu, me, 'menu', 'menu', 'menu', 'menu').anchor.set(0.5);
 
     me.add.text(Math.round(me.game.width/2), Math.round(me.game.height/2) - 20, 
-      '跑完' + me.best + '米，跌倒' + me.fallTimes + '次', 
+      '最好成绩' + me.best + '米，跌倒' + me.fallTimes + '次', 
       { font: '28px bold Arial', fill: '#999999'}
     ).anchor.set(0.5);
 

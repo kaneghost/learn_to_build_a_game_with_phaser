@@ -232,7 +232,6 @@ MyGame.Play.prototype = {
     
     var nextLevel = me.level + 1;
     if (nextLevel > MyGame.LEVEL_COUNT) {
-      localStorage.level = 1;
       me.stopTimer();
       me.state.start('YouWin');
     } else {
