@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.easy.meterrace" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.easy.meterrace" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>跑完一百米</name>
     <description>
         加油，比比看谁先跑完一百米！
@@ -17,21 +17,22 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-
     <preference name="Orientation" value="landscape" />
     <preference name="Fullscreen" value="true" />
-    
     <platform name="android">
-        <plugin name="cordova-plugin-crosswalk-webview" spec="~1.6.1" />
-        <preference name="CrosswalkAnimatable" value="true" />
-        <preference name="android-minSdkVersion" value="17"/>
-        <preference name="android-targetSdkVersion" value="22"/>
+        <preference name="android-minSdkVersion" value="17" />
+        <preference name="android-targetSdkVersion" value="22" />
         <allow-intent href="market:*" />
     </platform>
-
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <plugin name="com.darktalker.cordova.screenshot" spec="https://github.com/gitawego/cordova-screenshot.git" />    
+    <plugin name="com.darktalker.cordova.screenshot" spec="https://github.com/gitawego/cordova-screenshot.git" />
+    <preference name="CrosswalkAnimatable" value="true" />
+    <preference name="xwalkVersion" value="xwalk_core_library_beta:18+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="true" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="https://github.com/crosswalk-project/cordova-plugin-crosswalk-webview.git" />
 </widget>
