@@ -14,11 +14,9 @@ MyGame.Play.prototype = {
     me.input.onDown.add(me.playerJump, me);
     me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.playerJump, me);
 
-    document.addEventListener('pause', function(){
-      console.log('paused');
-      if (me.s_music) me.s_music.stop();
+    document.addEventListener('pause', function() {
       me.state.start('MainMenu');
-    }, false);
+    }, false);   
   },
 
   loadLevel: function() {
@@ -43,14 +41,7 @@ MyGame.Play.prototype = {
   setupSound: function() {
     var me = this;
 
-    me.sound.volume = 0.3;
-
-    if (!me.s_music) me.s_music = me.add.audio('music');
-    me.s_music.play('', 0, 1, true);
-    
-    if (!me.s_hit) me.s_hit = me.add.audio('hit');
-    if (!me.s_jump) me.s_jump = me.add.audio('jump');
-    if (!me.s_completed) me.s_completed = me.add.audio('completed');
+    window.plugins.NativeAudio.loop('music');
   },
 
   setupHUD: function() {
@@ -96,7 +87,7 @@ MyGame.Play.prototype = {
 
     me.player.health--;
     if (me.player.health <= 0) {
-      me.s_music.pause();
+      window.plugins.NativeAudio.stop('music');
       me.stopTimer();      
       me.state.start('YouLose');
     } else {
@@ -193,7 +184,7 @@ MyGame.Play.prototype = {
     var me = this;
 
     if (me.player.body.blocked.down) {
-      this.s_jump.play();       
+      window.plugins.NativeAudio.play('jump');
       me.player.animations.stop();
       me.player.frameName = 'alienBlue_walk2';
       me.player.body.velocity.y = -MyGame.PLAYER_VELOCITY_Y;
@@ -216,7 +207,7 @@ MyGame.Play.prototype = {
     }
 
     me.player.alive = false;
-    me.s_hit.play(); 
+    window.plugins.NativeAudio.play('hit');
 
     me.loseOneLife();
     me.initPlayer();
@@ -225,8 +216,8 @@ MyGame.Play.prototype = {
   levelCompleted: function() {
     var me = this;
     
-    me.s_music.pause();
-    me.s_completed.play();
+    window.plugins.NativeAudio.stop('music');
+    window.plugins.NativeAudio.play('completed');
 
     localStorage.setItem('fallTimes' + me.level, me.currFallTimes);
     localStorage.best = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width);
@@ -239,6 +230,7 @@ MyGame.Play.prototype = {
     var nextLevel = me.level + 1;
     if (nextLevel > MyGame.LEVEL_COUNT) {
       me.stopTimer();
+      window.plugins.NativeAudio.stop('music');
       me.state.start('YouWin');
     } else {
       localStorage.level = nextLevel;
@@ -251,9 +243,6 @@ MyGame.Play.prototype = {
 
     // meters
     me.metersLabel.text = (me.level - 1) * 10 + Math.round(me.player.x * 10 / me.world.width) + 'm';
-
-    // fall times
-    // me.fallTimesLabel.text = '#' + me.fallTimes;
   },
 
   update: function() {

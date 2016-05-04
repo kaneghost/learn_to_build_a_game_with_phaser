@@ -4,12 +4,12 @@ MyGame.YouWin = function () {};
 
 MyGame.YouWin.prototype = {
   preload: function () {
-    var me = this;
-    
+    var me = this;    
+
     me.fallTimes = 0;
     for (var i = 1; i <= 10; i++) {
       me.fallTimes += parseInt(localStorage.getItem('fallTimes' + i)) || 0;
-    }    
+    }
   },
 
   create: function() {

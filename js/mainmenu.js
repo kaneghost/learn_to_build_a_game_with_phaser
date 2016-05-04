@@ -5,7 +5,9 @@ MyGame.MainMenu = function () {};
 MyGame.MainMenu.prototype = {
   preload: function () {
     var me = this;
-    
+
+    window.plugins.NativeAudio.stop('music');
+
     me.fallTimes = 0;
     for (var i = 1; i <= 10; i++) {
       me.fallTimes += parseInt(localStorage.getItem('fallTimes' + i)) || 0;

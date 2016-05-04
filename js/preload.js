@@ -21,10 +21,37 @@ MyGame.Preload.prototype = {
     me.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
     me.game.load.bitmapFont('myfont', 'assets/font.png', 'assets/font.fnt');
 
-    me.load.audio('hit', 'assets/hit.mp3');
-    me.load.audio('jump', 'assets/jump.mp3');    
-    me.load.audio('music', 'assets/bg.mp3');
-    me.load.audio('completed', 'assets/completed.mp3');
+    window.plugins.NativeAudio.preloadComplex( 'music', 'assets/bg.mp3', 0.3, 1, 0, function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+    window.plugins.NativeAudio.preloadComplex( 'hit', 'assets/hit.mp3', 0.3, 1, 0, function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+    window.plugins.NativeAudio.preloadComplex( 'jump', 'assets/jump.mp3', 0.3, 1, 0, function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });    
+    window.plugins.NativeAudio.preloadComplex( 'completed', 'assets/completed.mp3', 0.3, 1, 0, function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+
+    // window.plugins.NativeAudio.preloadSimple( 'hit', 'assets/hit.mp3', function(msg){
+    // }, function(msg){
+    //     console.log( 'error: ' + msg );
+    // });    
+
+    // window.plugins.NativeAudio.preloadSimple( 'jump', 'assets/jump.mp3', function(msg){
+    // }, function(msg){
+    //     console.log( 'error: ' + msg );
+    // }); 
+
+    // window.plugins.NativeAudio.preloadSimple( 'completed', 'assets/completed.mp3', function(msg){
+    // }, function(msg){
+    //     console.log( 'error: ' + msg );
+    // });    
 
     me.game.time.advancedTiming = true;
   },
