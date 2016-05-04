@@ -13,6 +13,12 @@ MyGame.Play.prototype = {
 
     me.input.onDown.add(me.playerJump, me);
     me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.playerJump, me);
+
+    document.addEventListener('pause', function(){
+      console.log('paused');
+      if (me.s_music) me.s_music.stop();
+      me.state.start('MainMenu');
+    }, false);
   },
 
   loadLevel: function() {
@@ -270,8 +276,8 @@ MyGame.Play.prototype = {
   render: function() {
     var me = this;
     me.game.debug.text(me.game.time.fps || '--', 2, 14, "#00ff00");
-    me.game.debug.body(me.player, '#fc2929', false);
-    me.enemyGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
-    me.fishGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
+    // me.game.debug.body(me.player, '#fc2929', false);
+    // me.enemyGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
+    // me.fishGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
   }  
 };
