@@ -6,6 +6,7 @@ MyGame.MainMenu.prototype = {
   preload: function () {
     var me = this;
 
+console.log('mainmenu');
     window.plugins.NativeAudio.stop('music');
 
     me.fallTimes = 0;
@@ -30,6 +31,8 @@ MyGame.MainMenu.prototype = {
 
     me.input.onDown.add(me.onClick, me);
     me.input.keyboard.addKey(Phaser.KeyCode.UP).onDown.add(me.onClick, me);
+
+    if (navigator.splashscreen) navigator.splashscreen.hide();
   },
 
   onClick: function() {

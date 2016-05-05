@@ -260,13 +260,14 @@ MyGame.Play.prototype = {
       if (me.player.x > me.world.width) me.levelCompleted();
       if (me.player.y > me.world.height) me.playerHit();
     }
-  },
+  }
+  // ,
 
-  render: function() {
-    var me = this;
-    me.game.debug.text(me.game.time.fps || '--', 2, 14, "#00ff00");
+  // render: function() {
+  //   var me = this;
+  //   me.game.debug.text(me.game.time.fps || '--', 2, 14, "#00ff00");
     // me.game.debug.body(me.player, '#fc2929', false);
     // me.enemyGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
     // me.fishGroup.forEach(function(e) {me.game.debug.body(e, '#fc2929', false);});
-  }  
+  // }  
 };

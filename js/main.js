@@ -1,4 +1,5 @@
 var MyGame = MyGame || {};
+console.log('main');
 
 var targetWidth = 840;//960; // 3:2
 var targetHeight = 560;//640;

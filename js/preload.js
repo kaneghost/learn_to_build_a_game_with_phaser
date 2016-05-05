@@ -12,6 +12,13 @@ MyGame.Preload.prototype = {
   preload: function () {
     var me = this;
 
+    console.log('preload');
+
+    // if we don't hide Android status bar,
+    // after Splash screen ends, the game canvas can't be full screen
+    if (StatusBar) StatusBar.hide();
+    if (navigator.splashscreen) navigator.splashscreen.show();
+
     for (var i = 1; i <= MyGame.LEVEL_COUNT; i++ ) {
       // 'level2', 'assets/level2.json'
       me.load.tilemap('level' + i, 'assets/level'+ i + '.json', null, Phaser.Tilemap.TILED_JSON);
@@ -36,24 +43,9 @@ MyGame.Preload.prototype = {
     window.plugins.NativeAudio.preloadComplex( 'completed', 'assets/completed.mp3', 0.3, 1, 0, function(msg){
     }, function(msg){
         console.log( 'error: ' + msg );
-    });
+    });  
 
-    // window.plugins.NativeAudio.preloadSimple( 'hit', 'assets/hit.mp3', function(msg){
-    // }, function(msg){
-    //     console.log( 'error: ' + msg );
-    // });    
-
-    // window.plugins.NativeAudio.preloadSimple( 'jump', 'assets/jump.mp3', function(msg){
-    // }, function(msg){
-    //     console.log( 'error: ' + msg );
-    // }); 
-
-    // window.plugins.NativeAudio.preloadSimple( 'completed', 'assets/completed.mp3', function(msg){
-    // }, function(msg){
-    //     console.log( 'error: ' + msg );
-    // });    
-
-    me.game.time.advancedTiming = true;
+    // me.game.time.advancedTiming = true;
   },
 
   create: function () {
