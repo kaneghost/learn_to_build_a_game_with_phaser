@@ -1,0 +1,9 @@
+{
+    "android": {
+        "release": {
+            "keystore": "../meterrace.keystore",
+            "alias": "meterrace",
+            "keystoreType": ""
+        }
+    }
+}
