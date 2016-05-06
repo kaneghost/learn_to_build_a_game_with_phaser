@@ -4,7 +4,7 @@ console.log('main');
 var targetWidth = 840;//960; // 3:2
 var targetHeight = 560;//640;
 
-MyGame.game = new Phaser.Game(targetWidth, targetHeight, Phaser.AUTO, 'game');
+MyGame.game = new Phaser.Game(targetWidth, targetHeight, Phaser.CANVAS, 'game');
 
 // console.log('Width' + window.innerWidth + 'Height' +  window.innerHeight + 'DPI' + window.devicePixelRatio);
 MyGame.game.state.add('Preload', MyGame.Preload);
