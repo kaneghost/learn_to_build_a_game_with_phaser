@@ -12,8 +12,6 @@ MyGame.Preload.prototype = {
   preload: function () {
     var me = this;
 
-    console.log('preload');
-
     // if we don't hide Android status bar,
     // after Splash screen ends, the game canvas can't be full screen
     if (StatusBar) StatusBar.hide();
@@ -71,7 +69,6 @@ MyGame.Preload.prototype = {
     me.scale.pageAlignVertically = true;
     
     me.physics.startSystem(Phaser.Physics.ARCADE);
-    // me.stage.backgroundColor = '#A6E5F5';
 
     // localStorage.level = 10; // debug
 

@@ -6,7 +6,6 @@ MyGame.MainMenu.prototype = {
   preload: function () {
     var me = this;
 
-console.log('mainmenu');
     window.plugins.NativeAudio.stop('music');
 
     me.fallTimes = 0;
