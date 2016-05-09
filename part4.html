@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+  <title>跑完一百米！</title>
+  <style type="text/css"> body { margin: 0; }</style>
+  <script src="js/phaser.min.js"></script>
+</head>
+
+<body>
+  <!-- the game logic 游戏逻辑-->
+  <script>
+    var Play = function () {};
+
+    Play.prototype = {
+      preload: function () {
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.pageAlignHorizontally = true;
+        this.scale.pageAlignVertically = true;
+
+        this.load.tilemap('tilemap', 'assets/level.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.image('tiles', 'assets/tiles.png');
+        this.load.atlas('texture-atlas', 'assets/texture-atlas.png', 'assets/texture-atlas.json');
+
+        this.physics.startSystem(Phaser.Physics.ARCADE);
+      },
+      create: function() {
+        // 设置游戏背景颜色
+        this.stage.backgroundColor = '#A6E5F5';
+
+        // 显示Tile Map
+        this.map = this.add.tilemap('tilemap');
+        this.map.addTilesetImage('mytileset', 'tiles');
+
+        this.backgroundLayer = this.map.createLayer('BackgroundLayer');
+        this.groundLayer = this.map.createLayer('GroundLayer');
+        this.map.setCollisionBetween(1, 35, true, 'GroundLayer');
+
+        this.groundLayer.resizeWorld();
+
+        // 显示Enemy
+        this.enemyGroup = this.game.add.group();
+        this.enemyGroup.enableBody = true;
+        this.map.createFromObjects(
+          'ObjectLayer', 'box',
+          'texture-atlas', 'blockerMad',
+          true, false, this.enemyGroup);
+
+        // 显示Player
+        this.player = this.add.sprite(60, 150, 'texture-atlas', 'alienBlue_walk2');
+        this.player.anchor.setTo(0.5, 0.5);
+        this.player.animations.add('walking', ['alienBlue_walk1', 'alienBlue_walk2'], 5, true);
+
+        this.physics.arcade.enable(this.player);
+        this.player.body.gravity.y = 1000;
+        this.camera.follow(this.player);
+
+        this.input.onDown.add(this.playerJump, this);
+      },
+
+      playerJump: function() {
+        if (this.player.body.blocked.down) {
+          this.player.animations.stop();
+          this.player.frameName = 'alienBlue_walk2';
+          this.player.body.velocity.y = -550;
+        }
+      },
+
+      playerHit: function(player, enemy) { 
+        this.player.animations.stop();
+        this.player.reset(60, 150);
+        this.player.body.velocity.x = 0;
+        this.player.body.velocity.y = 0;
+
+        this.player.body.blocked.down = false;
+      },      
+
+      update: function() {
+        this.physics.arcade.collide(this.player, this.groundLayer);
+        this.physics.arcade.overlap(this.player, this.enemyGroup, this.playerHit, null, this);
+
+        if (this.player.body.blocked.down) {
+          this.player.body.velocity.x = 260;
+          this.player.animations.play('walking');
+        }
+      }
+    };
+  </script>
+
+  <!-- the main app 主程序-->
+  <script>
+    var targetWidth = 840;
+    var targetHeight = 560;
+    var newWidth = (window.innerWidth/window.innerHeight) * targetHeight;
+
+    var game = new Phaser.Game(newWidth, targetHeight, Phaser.AUTO);
+    game.state.add('Play', Play);
+    game.state.start('Play');
+  </script>
+</body>
+</html>
