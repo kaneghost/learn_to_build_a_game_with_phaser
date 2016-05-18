@@ -2,6 +2,8 @@
 
 这是一个教大家用Phaser和PhoneGap来开发iOS和Android手机游戏的教程
 
+![](assets/screenshots.jpg)
+
 两个月前看到[Phaser](http://phaser.io)这个很简洁漂亮的HTML5 Javascript游戏框架后便有了在业余时间做一个手游玩玩的念头。一个月前也开始陆陆续续的照着[Phaser官网的教程](http://phaser.io/tutorials/making-your-first-phaser-game)学习Phaser。
 
 为什么要写下面一系列的教程呢？主要是为了治愈目前的拖延，督促自己完成目标。而且：从头到尾设计一个游戏，进行编码并最终在AppStore上线是一件很好玩的事情。不是嚒？“从AppStore下载自己写的游戏来玩”，想想就觉得很酷 :-)
@@ -22,3 +24,10 @@
 ## 有用的知识 ##
 1. [压缩游戏里的PNG图片](http://zhongzhu.github.io/2016/04/05/%E5%8E%8B%E7%BC%A9%E6%B8%B8%E6%88%8F%E9%87%8C%E7%9A%84PNG%E5%9B%BE%E7%89%87/)
 - ToDo
+
+## Android和iOS版APP已经发布，敬请下载试玩
+* Android
+	* [Google Play](https://play.google.com/store/apps/details?id=com.easy.meterrace "Google Play")
+	* [豌豆荚](http://www.wandoujia.com/apps/com.easy.meterrace "豌豆荚")
+* iOS
+	* [AppStore](https://itunes.apple.com/us/developer/zhu-zhong/id1035152444 "AppStore")
