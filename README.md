@@ -19,7 +19,8 @@
 4. [Phaser基础知识](http://zhongzhu.github.io/2016/03/28/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-4-Phaser%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/)
 5. [显示游戏场景](http://zhongzhu.github.io/2016/04/10/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-5-%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF/)
 6. [让Player动起来](http://zhongzhu.github.io/2016/05/09/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-6-%E8%AE%A9Player%E5%8A%A8%E8%B5%B7%E6%9D%A5/)
-7. ToDo
+7. [游戏的状态及Player胜利失败条件](http://zhongzhu.github.io/2016/05/27/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-7-%E6%B8%B8%E6%88%8F%E7%9A%84%E7%8A%B6%E6%80%81%E5%8F%8APlayer%E8%83%9C%E5%88%A9%E5%A4%B1%E8%B4%A5%E6%9D%A1%E4%BB%B6/) 
+8. ToDo
 
 ## 有用的知识 ##
 1. [压缩游戏里的PNG图片](http://zhongzhu.github.io/2016/04/05/%E5%8E%8B%E7%BC%A9%E6%B8%B8%E6%88%8F%E9%87%8C%E7%9A%84PNG%E5%9B%BE%E7%89%87/)
