@@ -16,6 +16,7 @@
 * Android
 	* [Google Play](https://play.google.com/store/apps/details?id=com.easy.meterrace "Google Play")
 	* [豌豆荚](http://www.wandoujia.com/apps/com.easy.meterrace "豌豆荚")
+	* [小米应用商店](http://app.mi.com/detail/397352 "小米应用商店")
 * iOS
 	* [AppStore](https://itunes.apple.com/us/developer/zhu-zhong/id1035152444 "AppStore")
 	
