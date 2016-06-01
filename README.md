@@ -11,6 +11,14 @@
 当然，如果你能从中受益，开发出属于你自己的游戏，那就更好了！
 
 下面的教程将一步一步的教你如何设计、开发和发布用Phaser开发的游戏。（教程在不断更新中）
+
+## 《跑完一百米》Android和iOS版游戏已经发布，敬请下载试玩
+* Android
+	* [Google Play](https://play.google.com/store/apps/details?id=com.easy.meterrace "Google Play")
+	* [豌豆荚](http://www.wandoujia.com/apps/com.easy.meterrace "豌豆荚")
+* iOS
+	* [AppStore](https://itunes.apple.com/us/developer/zhu-zhong/id1035152444 "AppStore")
+	
 ## 教程 ##
 
 1. [为什么写这篇博客](http://zhongzhu.github.io/2016/03/11/%E7%94%A8Phaser%E5%92%8CPhoneGap%E6%9D%A5%E5%BC%80%E5%8F%91iOS%E5%92%8CAndroid%E6%B8%B8%E6%88%8F-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%99%E8%BF%99%E7%AF%87%E5%8D%9A%E5%AE%A2/)
@@ -25,10 +33,3 @@
 ## 有用的知识 ##
 1. [压缩游戏里的PNG图片](http://zhongzhu.github.io/2016/04/05/%E5%8E%8B%E7%BC%A9%E6%B8%B8%E6%88%8F%E9%87%8C%E7%9A%84PNG%E5%9B%BE%E7%89%87/)
 - ToDo
-
-## Android和iOS版APP已经发布，敬请下载试玩
-* Android
-	* [Google Play](https://play.google.com/store/apps/details?id=com.easy.meterrace "Google Play")
-	* [豌豆荚](http://www.wandoujia.com/apps/com.easy.meterrace "豌豆荚")
-* iOS
-	* [AppStore](https://itunes.apple.com/us/developer/zhu-zhong/id1035152444 "AppStore")
